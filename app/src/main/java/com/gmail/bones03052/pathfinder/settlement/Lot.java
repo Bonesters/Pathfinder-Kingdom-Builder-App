@@ -6,7 +6,7 @@ package com.gmail.bones03052.pathfinder.settlement;
 public class Lot
 {
     private boolean empty=true;
-    private Building occupant;
+    private BuildingOld occupant;
     private boolean shared=false;
 
     public Lot()
@@ -24,12 +24,12 @@ public class Lot
         this.empty = empty;
     }
 
-    public Building getOccupant()
+    public BuildingOld getOccupant()
     {
         return occupant;
     }
 
-    public void setOccupant(Building occupant)
+    public void setOccupant(BuildingOld occupant)
     {
         this.occupant = occupant;
         shared=((occupant.getLots()>1)?true:false);
