@@ -93,6 +93,6 @@ public enum Qualities
         this.PURCHASE_MULTIPLIER=pm;
         this.DANGER_MODIFIER=danger;
         this.SPECIAL=((special==0)?false:true);
-        this.SPECIAL_TEXT=specialText;
+        this.SPECIAL_TEXT=this.SPECIAL?specialText:"";
     }
 }

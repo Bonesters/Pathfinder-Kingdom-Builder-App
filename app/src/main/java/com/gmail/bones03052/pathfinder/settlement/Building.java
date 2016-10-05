@@ -57,28 +57,7 @@ public class Building
 
     public Building(BuildStat b)
     {
-        this.id=b.ordinal();
-        this.name=b.name().toLowerCase();
-        this.economy=b.economy;
-        this.loyalty=b.loyalty;
-        this.stability=b.stability;
-        this.unrest=b.unrest;
-        this.corruption=b.corruption;
-        this.crime=b.crime;
-        this.law=b.law;
-        this.lore=b.lore;
-        this.society=b.society;
-        this.population=b.population;
-        this.fame=b.fame;
-        this.infamy=b.infamy;
-        this.baseValue=b.baseValue;
-        this.level=b.level;
-        this.productivity=b.productivity;
-        this.lots=b.lots;
-        this.cost=b.cost;
-        this.buildTime=b.buildTime;
-        this.special=b.special;
-        this.specialText=b.specialText;
+        this(b.ordinal(),b.name().toLowerCase(),b.economy,b.loyalty,b.stability,b.unrest,b.corruption,b.crime,b.law,b.lore,b.society,b.population,b.fame,b.infamy,b.baseValue,b.level,b.productivity,b.lots,b.cost,b.buildTime,b.special,b.specialText);
     }
 
     public int getId()
@@ -284,7 +263,6 @@ public class Building
     @Override
     public String toString()
     {
-        //TODO: add toString
         return "{"+id+","+name+","+economy+","+loyalty+","+stability+","+unrest+","+corruption+","+crime+","+law+","+lore+","+society+","+population+","+fame+","+infamy+","+baseValue+","+level+","+productivity+","+lots+","+cost+","+buildTime+"}";
     }
 

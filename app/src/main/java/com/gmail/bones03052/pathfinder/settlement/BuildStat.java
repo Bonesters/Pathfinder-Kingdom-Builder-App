@@ -222,6 +222,12 @@ public enum BuildStat
         }
     }
 
+    @Override
+    public String toString()
+    {
+        return (new Building(this)).toString();
+    }
+
     /*
     discounts
         academy

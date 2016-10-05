@@ -7,6 +7,8 @@ import android.content.Context;
 
 import com.gmail.bones03052.pathfinder.settlement.BuildStat;
 import com.gmail.bones03052.pathfinder.settlement.Building;
+import com.gmail.bones03052.pathfinder.settlement.Qualities;
+import com.gmail.bones03052.pathfinder.settlement.Quality;
 
 /**
  * Created by Dennis Champagne on 10/3/16.
@@ -115,6 +117,10 @@ public class DBHandler extends SQLiteOpenHelper
         {
             addBuilding(new Building(b));
         }
+        for(Qualities q:Qualities.values())
+        {
+            addQuality(new Quality(q));
+        }
         //TODO: add onCreate for database.
     }
 
@@ -154,5 +160,10 @@ public class DBHandler extends SQLiteOpenHelper
 
         db.insert(TABLE_BUILDINGS, null, values);
         db.close();
+    }
+
+    public void addQuality(Quality q)
+    {
+
     }
 }
