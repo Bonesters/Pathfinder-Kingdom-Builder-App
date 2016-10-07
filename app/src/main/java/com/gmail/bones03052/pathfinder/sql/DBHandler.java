@@ -44,6 +44,10 @@ public class DBHandler extends SQLiteOpenHelper
     public static final String COL_LOTS="lots";
     public static final String COL_COST="cost (BP)";
     public static final String COL_BUILD_TIME="build time (months)";
+    public static final String COL_HOUSES_REQUIRED="houses required";
+    public static final String COL_WATER_REQUIRED="water required";
+    public static final String COL_UPGRADE_TO="upgrades to";
+    public static final String COL_DISCOUNTS="discounts";
     public static final String COL_SPELL_MOD="spell level modifier";
     public static final String COL_BASE_MUL="base value multiplier";
     public static final String COL_PUR_MUL="purchase value multiplier";
@@ -61,21 +65,21 @@ public class DBHandler extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        String CreateBuildingTable="CREATE TABLE "+TABLE_BUILDINGS+"("+COL_ID+" INTEGER PRIMARY KEY,"+COL_NAME+" TEXT,"+COL_ECO+" INTEGER,"+COL_LOYALTY+" INTEGER,"+COL_STABILITY+" INTEGER,"+COL_UNREST+" INTEGER,"+COL_CORRUPTION+" INTEGER,"+COL_CRIME+" INTEGER,"+COL_POP+" INTEGER,"+COL_FAME+" INTEGER,"+COL_INFAMY+" REAL,"+COL_BVAL+" INTEGER,"+COL_LVL+" INTEGER,"+COL_PROD+" INTEGER,"+COL_LOTS+" INTEGER,"+COL_COST+" INTEGER,"+COL_BUILD_TIME+" INTEGER,"+COL_SPECIAL+" BOOLEAN,"+COL_SPECIAL_TEXT+" TEXT)";
+        String CreateBuildingTable="CREATE TABLE "+TABLE_BUILDINGS+"("+COL_ID+" INTEGER PRIMARY KEY,"+COL_NAME+" TEXT UNIQUE,"+COL_ECO+" INTEGER,"+COL_LOYALTY+" INTEGER,"+COL_STABILITY+" INTEGER,"+COL_UNREST+" INTEGER,"+COL_CORRUPTION+" INTEGER,"+COL_CRIME+" INTEGER,"+COL_POP+" INTEGER,"+COL_FAME+" INTEGER,"+COL_INFAMY+" REAL,"+COL_BVAL+" INTEGER,"+COL_LVL+" INTEGER,"+COL_PROD+" INTEGER,"+COL_LOTS+" INTEGER,"+COL_COST+" INTEGER,"+COL_BUILD_TIME+" INTEGER,"+COL_HOUSES_REQUIRED+" INTEGER,"+COL_WATER_REQUIRED+COL_UPGRADE_TO+" TEXT,"+COL_DISCOUNTS+" TEXT,"+" BOOLEAN,"+COL_SPECIAL+" BOOLEAN,"+COL_SPECIAL_TEXT+" TEXT)";
         db.execSQL(CreateBuildingTable);
         for(BuildStat b:BuildStat.values())
         {
             addBuilding(new Building(b));
         }
 
-        String CreateQualitiesTable="CREATE TABLE "+TABLE_QUALITIES+"("+COL_ID+" INTEGER PRIMARY KEY,"+COL_NAME+" TEXT,"+COL_CORRUPTION+" INTEGER,"+COL_PROD+" INTEGER,"+COL_SOCIETY+" INTEGER,"+COL_LAW+" INTEGER,"+COL_LORE+" INTEGER,"+COL_CRIME+" INTEGER,"+COL_SPELL_MOD+" INTEGER,"+COL_BASE_MUL+" REAL,"+COL_PUR_MUL+" REAL,"+COL_DANGER+" INTEGER,"+COL_SPECIAL+" BOOLEAN,"+COL_SPECIAL_TEXT+" TEXT)";
+        String CreateQualitiesTable="CREATE TABLE "+TABLE_QUALITIES+"("+COL_ID+" INTEGER PRIMARY KEY,"+COL_NAME+" TEXT UNIQUE,"+COL_CORRUPTION+" INTEGER,"+COL_PROD+" INTEGER,"+COL_SOCIETY+" INTEGER,"+COL_LAW+" INTEGER,"+COL_LORE+" INTEGER,"+COL_CRIME+" INTEGER,"+COL_SPELL_MOD+" INTEGER,"+COL_BASE_MUL+" REAL,"+COL_PUR_MUL+" REAL,"+COL_DANGER+" INTEGER,"+COL_SPECIAL+" BOOLEAN,"+COL_SPECIAL_TEXT+" TEXT)";
         db.execSQL(CreateQualitiesTable);
         for(Qualities q:Qualities.values())
         {
             addQuality(new Quality(q));
         }
 
-        String CreateTownGovTable="CREATE TABLE "+TABLE_TOWN_GOVERNMENTS+"("+COL_ID+" INTEGER PRIMARY KEY,"+COL_NAME+" TEXT,"+COL_CORRUPTION+" INTEGER,"+COL_PROD+" INTEGER,"+COL_SOCIETY+" INTEGER,"+COL_LAW+" INTEGER,"+COL_LORE+" INTEGER,"+COL_CRIME+" INTEGER,"+COL_SPECIAL+" BOOLEAN,"+COL_SPECIAL_TEXT+" TEXT)";
+        String CreateTownGovTable="CREATE TABLE "+TABLE_TOWN_GOVERNMENTS+"("+COL_ID+" INTEGER PRIMARY KEY,"+COL_NAME+" TEXT UNIQUE,"+COL_CORRUPTION+" INTEGER,"+COL_PROD+" INTEGER,"+COL_SOCIETY+" INTEGER,"+COL_LAW+" INTEGER,"+COL_LORE+" INTEGER,"+COL_CRIME+" INTEGER,"+COL_SPECIAL+" BOOLEAN,"+COL_SPECIAL_TEXT+" TEXT)";
         db.execSQL(CreateTownGovTable);
         for(TownGovernments g:TownGovernments.values())
         {
@@ -115,6 +119,10 @@ public class DBHandler extends SQLiteOpenHelper
         values.put(COL_LOTS,b.getLots());
         values.put(COL_COST,b.getCost());
         values.put(COL_BUILD_TIME,b.getBuildTime());
+        values.put(COL_HOUSES_REQUIRED,b.getHousesRequired());
+        values.put(COL_WATER_REQUIRED,b.isWaterRequired());
+        values.put(COL_UPGRADE_TO,b.getUpgrade());
+        values.put(COL_DISCOUNTS,b.getDiscounts());
         values.put(COL_SPECIAL,b.isSpecial());
         values.put(COL_SPECIAL_TEXT,b.getSpecial());
 
