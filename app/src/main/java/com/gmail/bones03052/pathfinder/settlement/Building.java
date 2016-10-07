@@ -298,4 +298,9 @@ public class Building
             this.specialText=specialText;
         }
     }
+
+    public double getMonthlyCost()
+    {
+        return ((double)this.cost)/((double)this.buildTime);
+    }
 }

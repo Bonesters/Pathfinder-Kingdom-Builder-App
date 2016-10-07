@@ -92,7 +92,10 @@ public class DBHandler extends SQLiteOpenHelper
     public void addBuilding(Building b)
     {
         ContentValues values = new ContentValues();
-        values.put(COL_ID,b.getId());
+        if(b.getId()>=0)
+        {
+            values.put(COL_ID,b.getId());
+        }
         values.put(COL_NAME,b.getName());
         values.put(COL_ECO,b.getEconomy());
         values.put(COL_LOYALTY,b.getLoyalty());
@@ -124,7 +127,10 @@ public class DBHandler extends SQLiteOpenHelper
     public void addQuality(Quality q)
     {
         ContentValues values = new ContentValues();
-        values.put(COL_ID,q.getId());
+        if(q.getId()>=0)
+        {
+            values.put(COL_ID,q.getId());
+        }
         values.put(COL_NAME,q.getName());
         values.put(COL_CORRUPTION,q.getCorruption());
         values.put(COL_PROD,q.getProductivity());
@@ -148,8 +154,10 @@ public class DBHandler extends SQLiteOpenHelper
     public void addTownGovernment(TownGovernment g)
     {
         ContentValues values = new ContentValues();
-
-        values.put(COL_ID,g.getId());
+        if(g.getId()>=0)
+        {
+            values.put(COL_ID,g.getId());
+        }
         values.put(COL_CORRUPTION,g.getCorruption());
         values.put(COL_PROD,g.getProductivity());
         values.put(COL_SOCIETY,g.getSociety());
