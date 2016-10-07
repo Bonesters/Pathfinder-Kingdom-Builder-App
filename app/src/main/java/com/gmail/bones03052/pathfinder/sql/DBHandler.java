@@ -89,7 +89,7 @@ public class DBHandler extends SQLiteOpenHelper
         //TODO: add version change handler.
     }
 
-    public void addBuilding(Building b)
+    public int addBuilding(Building b)
     {
         ContentValues values = new ContentValues();
         if(b.getId()>=0)
@@ -120,11 +120,12 @@ public class DBHandler extends SQLiteOpenHelper
 
         SQLiteDatabase db = this.getWritableDatabase();
 
-        db.insert(TABLE_BUILDINGS, null, values);
+        int i=(int)db.insert(TABLE_BUILDINGS, null, values);
         db.close();
+        return i;
     }
 
-    public void addQuality(Quality q)
+    public int addQuality(Quality q)
     {
         ContentValues values = new ContentValues();
         if(q.getId()>=0)
@@ -147,11 +148,12 @@ public class DBHandler extends SQLiteOpenHelper
 
         SQLiteDatabase db = this.getWritableDatabase();
 
-        db.insert(TABLE_QUALITIES, null, values);
+        int i=(int)db.insert(TABLE_QUALITIES, null, values);
         db.close();
+        return i;
     }
 
-    public void addTownGovernment(TownGovernment g)
+    public int addTownGovernment(TownGovernment g)
     {
         ContentValues values = new ContentValues();
         if(g.getId()>=0)
@@ -169,7 +171,41 @@ public class DBHandler extends SQLiteOpenHelper
 
         SQLiteDatabase db = this.getWritableDatabase();
 
-        db.insert(TABLE_TOWN_GOVERNMENTS, null, values);
+        int i=(int)db.insert(TABLE_TOWN_GOVERNMENTS, null, values);
         db.close();
+        return i;
     }
+
+
+
+    /*
+    example method from:
+        http://www.techotopia.com/index.php/An_Android_Studio_SQLite_Database_Tutorial
+
+        public Product findProduct(String productname)
+        {
+            String query = "Select * FROM " + TABLE_PRODUCTS + " WHERE " + COLUMN_PRODUCTNAME + " =  \"" + productname + "\"";
+
+            SQLiteDatabase db = this.getWritableDatabase();
+
+            Cursor cursor = db.rawQuery(query, null);
+
+            Product product = new Product();
+
+            if (cursor.moveToFirst())
+            {
+                cursor.moveToFirst();
+                product.setID(Integer.parseInt(cursor.getString(0)));
+                product.setProductName(cursor.getString(1));
+                product.setQuantity(Integer.parseInt(cursor.getString(2)));
+                cursor.close();
+            }
+            else
+            {
+                product = null;
+            }
+            db.close();
+            return product;
+        }
+     */
 }
