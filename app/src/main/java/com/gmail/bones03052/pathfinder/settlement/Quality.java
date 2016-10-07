@@ -198,4 +198,9 @@ public class Quality
     }
 
     //TODO: add toString()
+    @Override
+    public String toString()
+    {
+        return "{"+id+","+name+","+corruption+","+productivity+","+society+","+law+","+lore+","+crime+","+spellMod+","+bValMul+","+purMul+","+danger+","+special+","+specialText+"}";
+    }
 }

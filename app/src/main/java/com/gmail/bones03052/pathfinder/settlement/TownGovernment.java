@@ -137,5 +137,9 @@ public class TownGovernment
         }
     }
 
-    //TODO: add toString().
+    @Override
+    public String toString()
+    {
+        return "{"+id+","+corruption+","+productivity+","+society+","+law+","+lore+","+crime+","+special+","+specialText+"}";
+    }
 }
