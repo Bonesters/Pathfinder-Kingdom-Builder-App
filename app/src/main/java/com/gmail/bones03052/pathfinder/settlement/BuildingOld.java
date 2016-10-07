@@ -2,6 +2,7 @@ package com.gmail.bones03052.pathfinder.settlement;
 
 /**
  * Created by Dennis Champagne on 9/2/16.
+ * @deprecated replaced by class Building
  */
 public class BuildingOld
 {
