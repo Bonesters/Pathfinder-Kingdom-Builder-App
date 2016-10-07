@@ -271,6 +271,14 @@ public class Building
         return special;
     }
 
+    public void setSpecial(boolean special)
+    {
+        this.special=special;
+        if(!special)
+        {
+            specialText="";
+        }
+    }
 
     public String getSpecial()
     {

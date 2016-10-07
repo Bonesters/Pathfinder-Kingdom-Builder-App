@@ -9,6 +9,8 @@ import com.gmail.bones03052.pathfinder.settlement.BuildStat;
 import com.gmail.bones03052.pathfinder.settlement.Building;
 import com.gmail.bones03052.pathfinder.settlement.Qualities;
 import com.gmail.bones03052.pathfinder.settlement.Quality;
+import com.gmail.bones03052.pathfinder.settlement.TownGovernment;
+import com.gmail.bones03052.pathfinder.settlement.TownGovernments;
 
 /**
  * Created by Dennis Champagne on 10/3/16.
@@ -21,61 +23,6 @@ public class DBHandler extends SQLiteOpenHelper
     private static final String TABLE_BUILDINGS = "buildings";
     private static final String TABLE_TOWN_GOVERNMENTS="town governments";
     private static final String TABLE_QUALITIES="qualities";
-    /*
-    what table has what values.
-        BUILDINGS
-            ID
-            NAME
-            ECO
-            LOYALTY
-            STABILITY
-            UNREST
-            CORRUPTION
-            CRIME
-            LAW
-            LORE
-            SOCIETY
-            POP
-            FAME
-            INFAMY
-            BVAL
-            LVL
-            PROD
-            LOTS
-            COST
-            BUILD_TIME
-            SPECIAL
-            SPECIAL_TEXT
-
-        TOWN_GOVERNMENTS
-            ID
-            NAME
-            CORRUPTION
-            CRIME
-            LAW
-            LORE
-            SOCIETY
-            PROD
-            SPECIAL
-            SPECIAL_TEXT
-
-        QUALITIES
-            ID
-            NAME
-            CORRUPTION
-            CRIME
-            LAW
-            LORE
-            SOCIETY
-            PROD
-            SPELL_MOD
-            BASE_MUL
-            PUR_MUL
-            DANGER
-            SPECIAL
-            SPECIAL_TEXT
-     */
-
 
     public static final String COL_ID="id";
     public static final String COL_NAME="name";
@@ -104,6 +51,7 @@ public class DBHandler extends SQLiteOpenHelper
     public static final String COL_SPECIAL="special";
     public static final String COL_SPECIAL_TEXT="special text";
 
+    public static final int CURRENT_VERSION=0;
 
     public DBHandler(Context context, String name,SQLiteDatabase.CursorFactory factory, int version)
     {
@@ -113,6 +61,9 @@ public class DBHandler extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db)
     {
+        //TODO: init the tables.
+
+        /*
         for(BuildStat b:BuildStat.values())
         {
             addBuilding(new Building(b));
@@ -121,7 +72,11 @@ public class DBHandler extends SQLiteOpenHelper
         {
             addQuality(new Quality(q));
         }
-        //TODO: add onCreate for database.
+        for(TownGovernments g:TownGovernments.values())
+        {
+            addTownGovernment(new TownGovernment(g));
+        }
+        */
     }
 
     @Override
@@ -164,6 +119,45 @@ public class DBHandler extends SQLiteOpenHelper
 
     public void addQuality(Quality q)
     {
+        ContentValues values = new ContentValues();
+        values.put(COL_ID,q.getId());
+        values.put(COL_NAME,q.getName());
+        values.put(COL_CORRUPTION,q.getCorruption());
+        values.put(COL_PROD,q.getProductivity());
+        values.put(COL_SOCIETY,q.getSociety());
+        values.put(COL_LAW,q.getLaw());
+        values.put(COL_LORE,q.getLore());
+        values.put(COL_CRIME,q.getCrime());
+        values.put(COL_SPELL_MOD,q.getSpellMod());
+        values.put(COL_BASE_MUL,q.getbValMul());
+        values.put(COL_PUR_MUL,q.getPurMul());
+        values.put(COL_DANGER,q.getDanger());
+        values.put(COL_SPECIAL,q.isSpecial());
+        values.put(COL_SPECIAL_TEXT,q.getSpecial());
 
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.insert(TABLE_QUALITIES, null, values);
+        db.close();
+    }
+
+    public void addTownGovernment(TownGovernment g)
+    {
+        ContentValues values = new ContentValues();
+
+        values.put(COL_ID,g.getId());
+        values.put(COL_CORRUPTION,g.getCorruption());
+        values.put(COL_PROD,g.getProductivity());
+        values.put(COL_SOCIETY,g.getSociety());
+        values.put(COL_LAW,g.getLaw());
+        values.put(COL_LORE,g.getLore());
+        values.put(COL_CRIME,g.getCrime());
+        values.put(COL_SPECIAL,g.isSpecial());
+        values.put(COL_SPECIAL_TEXT,g.getSpecial());
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.insert(TABLE_TOWN_GOVERNMENTS, null, values);
+        db.close();
     }
 }
