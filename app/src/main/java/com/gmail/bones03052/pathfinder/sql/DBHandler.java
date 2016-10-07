@@ -61,22 +61,26 @@ public class DBHandler extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        //TODO: init the tables.
-
-        /*
+        String CreateBuildingTable="CREATE TABLE "+TABLE_BUILDINGS+"("+COL_ID+" INTEGER PRIMARY KEY,"+COL_NAME+" TEXT,"+COL_ECO+" INTEGER,"+COL_LOYALTY+" INTEGER,"+COL_STABILITY+" INTEGER,"+COL_UNREST+" INTEGER,"+COL_CORRUPTION+" INTEGER,"+COL_CRIME+" INTEGER,"+COL_POP+" INTEGER,"+COL_FAME+" INTEGER,"+COL_INFAMY+" REAL,"+COL_BVAL+" INTEGER,"+COL_LVL+" INTEGER,"+COL_PROD+" INTEGER,"+COL_LOTS+" INTEGER,"+COL_COST+" INTEGER,"+COL_BUILD_TIME+" INTEGER,"+COL_SPECIAL+" BOOLEAN,"+COL_SPECIAL_TEXT+" TEXT)";
+        db.execSQL(CreateBuildingTable);
         for(BuildStat b:BuildStat.values())
         {
             addBuilding(new Building(b));
         }
+
+        String CreateQualitiesTable="CREATE TABLE "+TABLE_QUALITIES+"("+COL_ID+" INTEGER PRIMARY KEY,"+COL_NAME+" TEXT,"+COL_CORRUPTION+" INTEGER,"+COL_PROD+" INTEGER,"+COL_SOCIETY+" INTEGER,"+COL_LAW+" INTEGER,"+COL_LORE+" INTEGER,"+COL_CRIME+" INTEGER,"+COL_SPELL_MOD+" INTEGER,"+COL_BASE_MUL+" REAL,"+COL_PUR_MUL+" REAL,"+COL_DANGER+" INTEGER,"+COL_SPECIAL+" BOOLEAN,"+COL_SPECIAL_TEXT+" TEXT)";
+        db.execSQL(CreateQualitiesTable);
         for(Qualities q:Qualities.values())
         {
             addQuality(new Quality(q));
         }
+
+        String CreateTownGovTable="CREATE TABLE "+TABLE_TOWN_GOVERNMENTS+"("+COL_ID+" INTEGER PRIMARY KEY,"+COL_NAME+" TEXT,"+COL_CORRUPTION+" INTEGER,"+COL_PROD+" INTEGER,"+COL_SOCIETY+" INTEGER,"+COL_LAW+" INTEGER,"+COL_LORE+" INTEGER,"+COL_CRIME+" INTEGER,"+COL_SPECIAL+" BOOLEAN,"+COL_SPECIAL_TEXT+" TEXT)";
+        db.execSQL(CreateTownGovTable);
         for(TownGovernments g:TownGovernments.values())
         {
             addTownGovernment(new TownGovernment(g));
         }
-        */
     }
 
     @Override
