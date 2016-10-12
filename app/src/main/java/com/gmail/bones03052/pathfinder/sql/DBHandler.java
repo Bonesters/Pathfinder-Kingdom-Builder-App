@@ -1,6 +1,7 @@
 package com.gmail.bones03052.pathfinder.sql;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.content.Context;
@@ -184,6 +185,42 @@ public class DBHandler extends SQLiteOpenHelper
         return i;
     }
 
+
+    public Building findBuilding(String name)
+    {
+        String query="SELECT * FROM "+TABLE_BUILDINGS+" WHERE "+COL_NAME+" = \""+name+"\"";
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor c = db.rawQuery(query, null);
+        Building b=null;
+        try
+        {
+            if(c.moveToFirst())
+            {
+                int i=0;
+                c.moveToFirst();
+                b=new Building(c.getInt(i++),c.getString(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getFloat(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++)==1,c.getString(i++),c.getString(i++),c.getInt(i++)==1,c.getString(i++));
+            }
+        }
+        catch(Exception e){}
+        c.close();
+        return b;
+    }
+
+    public Building findBuilding(int id)
+    {
+        String query="SELECT * FROM "+TABLE_BUILDINGS+" WHERE "+COL_ID+" = \""+id+"\"";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        Building b=null;
+        if(c.moveToFirst())
+        {
+            c.moveToFirst();
+            b=findBuilding(c.getString(1));
+        }
+        c.close();
+        return b;
+    }
 
 
     /*
