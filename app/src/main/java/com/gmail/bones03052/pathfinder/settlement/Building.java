@@ -33,6 +33,14 @@ public class Building
     private String upgrade;
     private String discount;
 
+    /**
+     * only use for deleting Building from the database.
+     */
+    public Building(String name)
+    {
+        this(-1,name,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,false,"","",false,"");
+    }
+
     public Building(int id,String name,int economy, int loyalty, int stability, int unrest, int corruption, int crime, int law, int lore, int society, int population, int fame, double infamy, int baseValue, int level, int productivity, int lots, int cost, int buildTime,int housesRequired,boolean waterRequired,String upgrade,String discount,boolean special,String specialText)
     {
         this.id=id;

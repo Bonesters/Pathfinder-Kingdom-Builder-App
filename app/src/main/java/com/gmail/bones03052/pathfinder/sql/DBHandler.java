@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.content.Context;
+import android.util.Log;
 
 import com.gmail.bones03052.pathfinder.settlement.BuildStat;
 import com.gmail.bones03052.pathfinder.settlement.Building;
@@ -15,6 +16,7 @@ import com.gmail.bones03052.pathfinder.settlement.TownGovernments;
 
 /**
  * Created by Dennis Champagne on 10/3/16.
+ * based off of example from <a href="http://www.techotopia.com/index.php/An_Android_Studio_SQLite_Database_Tutorial">this website</a>.
  */
 
 public class DBHandler extends SQLiteOpenHelper
@@ -169,6 +171,7 @@ public class DBHandler extends SQLiteOpenHelper
         {
             values.put(COL_ID,g.getId());
         }
+        values.put(COL_NAME,g.getName());
         values.put(COL_CORRUPTION,g.getCorruption());
         values.put(COL_PROD,g.getProductivity());
         values.put(COL_SOCIETY,g.getSociety());
@@ -202,7 +205,11 @@ public class DBHandler extends SQLiteOpenHelper
                 b=new Building(c.getInt(i++),c.getString(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getFloat(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++)==1,c.getString(i++),c.getString(i++),c.getInt(i++)==1,c.getString(i++));
             }
         }
-        catch(Exception e){}
+        catch(Exception e)
+        {
+            Log.v("myApp","Error: unable to find Building "+name);
+            Log.v("myApp",">>Exception: "+e);
+        }
         c.close();
         return b;
     }
@@ -222,35 +229,153 @@ public class DBHandler extends SQLiteOpenHelper
         return b;
     }
 
+    public Quality findQuality(String name)
+    {
+        String query="SELECT * FROM "+TABLE_QUALITIES+" WHERE "+COL_NAME+" = \""+name+"\"";
+        SQLiteDatabase db = this.getWritableDatabase();
 
-    /*
-    example method from:
-        http://www.techotopia.com/index.php/An_Android_Studio_SQLite_Database_Tutorial
-
-        public Product findProduct(String productname)
+        Cursor c = db.rawQuery(query, null);
+        Quality q=null;
+        try
         {
-            String query = "Select * FROM " + TABLE_PRODUCTS + " WHERE " + COLUMN_PRODUCTNAME + " =  \"" + productname + "\"";
-
-            SQLiteDatabase db = this.getWritableDatabase();
-
-            Cursor cursor = db.rawQuery(query, null);
-
-            Product product = new Product();
-
-            if (cursor.moveToFirst())
+            if(c.moveToFirst())
             {
-                cursor.moveToFirst();
-                product.setID(Integer.parseInt(cursor.getString(0)));
-                product.setProductName(cursor.getString(1));
-                product.setQuantity(Integer.parseInt(cursor.getString(2)));
-                cursor.close();
+                int i=0;
+                c.moveToFirst();
+                q=new Quality(c.getInt(i++),c.getString(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getDouble(i++),c.getDouble(i++),c.getInt(i++),(c.getInt(i++)==1),c.getString(i++));
             }
-            else
-            {
-                product = null;
-            }
-            db.close();
-            return product;
         }
-     */
+        catch(Exception e)
+        {
+            Log.v("myApp","Error: unable to find Quality "+name);
+            Log.v("myApp",">>Exception: "+e);
+        }
+        return q;
+    }
+
+    public Quality findQuality(int id)
+    {
+        String query="SELECT * FROM "+TABLE_QUALITIES+" WHERE "+COL_ID+" = \""+id+"\"";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        Quality q=null;
+        if(c.moveToFirst())
+        {
+            c.moveToFirst();
+            q=findQuality(c.getString(1));
+        }
+        c.close();
+        return q;
+    }
+
+    public TownGovernment findTownGovernment(String name)
+    {
+        String query="SELECT * FROM "+TABLE_TOWN_GOVERNMENTS+" WHERE "+COL_NAME+" = \""+name+"\"";
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor c = db.rawQuery(query, null);
+        TownGovernment g=null;
+        try
+        {
+            if(c.moveToFirst())
+            {
+                int i=0;
+                c.moveToFirst();
+                g=new TownGovernment(c.getInt(i++),c.getString(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),c.getInt(i++),(c.getInt(i++)==1),c.getString(i++));
+            }
+        }
+        catch(Exception e)
+        {
+            Log.v("myApp","Error: unable to find Quality "+name);
+            Log.v("myApp",">>Exception: "+e);
+        }
+        return g;
+    }
+
+    public TownGovernment findTownGovernment(int id)
+    {
+        String query="SELECT * FROM "+TABLE_TOWN_GOVERNMENTS+" WHERE "+COL_ID+" = \""+id+"\"";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        TownGovernment g=null;
+        if(c.moveToFirst())
+        {
+            c.moveToFirst();
+            g=findTownGovernment(c.getString(1));
+        }
+        c.close();
+        return g;
+    }
+
+    public boolean deleteBuilding(String name)
+    {
+        for(BuildStat B:BuildStat.values())
+        {
+            if(B.name().equalsIgnoreCase(name))
+            {
+                return false;
+            }
+        }
+        boolean result=false;
+        String query="SELECT * FROM "+TABLE_BUILDINGS+" WHERE "+COL_NAME+" = \""+name+"\"";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        Building b=new Building(name);
+        if(c.moveToFirst())
+        {
+            b.setId(c.getInt(0));
+            int i=db.delete(TABLE_BUILDINGS,COL_ID+" = ?",new String[] {String.valueOf(b.getId())});
+            c.close();
+            result=(i!=0);
+        }
+        return result;
+    }
+
+    public boolean deleteQuality(String name)
+    {
+        for(Qualities Q:Qualities.values())
+        {
+            if(Q.name().equalsIgnoreCase(name))
+            {
+                return false;
+            }
+        }
+        boolean result=false;
+        String query="SELECT * FROM "+TABLE_BUILDINGS+" WHERE "+COL_NAME+" = \""+name+"\"";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        Quality q=new Quality(name);
+        if(c.moveToFirst())
+        {
+            q.setId(c.getInt(0));
+            int i=db.delete(TABLE_BUILDINGS,COL_ID+" = ?",new String[] {String.valueOf(q.getId())});
+            c.close();
+            result=(i!=0);
+        }
+        return result;
+    }
+
+    public boolean deleteTownGovernment(String name)
+    {
+        for(TownGovernments G:TownGovernments.values())
+        {
+            if(G.name().equalsIgnoreCase(name))
+            {
+                return false;
+            }
+        }
+        boolean result=false;
+        String query="SELECT * FROM "+TABLE_BUILDINGS+" WHERE "+COL_NAME+" = \""+name+"\"";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        TownGovernment g=new TownGovernment(name);
+        if(c.moveToFirst())
+        {
+            g.setId(c.getInt(0));
+            int i=db.delete(TABLE_BUILDINGS,COL_ID+" = ?",new String[] {String.valueOf(g.getId())});
+            c.close();
+            result=(i!=0);
+        }
+        return result;
+    }
 }

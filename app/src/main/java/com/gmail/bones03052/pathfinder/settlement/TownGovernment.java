@@ -7,6 +7,7 @@ package com.gmail.bones03052.pathfinder.settlement;
 public class TownGovernment
 {
     private int id;
+    private String name;
     private int corruption;
     private int productivity;
     private int society;
@@ -16,9 +17,18 @@ public class TownGovernment
     private boolean special;
     private String specialText;
 
-    public TownGovernment(int id,int corruption,int productivity,int society,int law,int lore,int crime,boolean special,String specialText)
+    /**
+     * only use for deleting Building from the database.
+     */
+    public TownGovernment(String name)
+    {
+        this(-1,name,0,0,0,0,0,0,false,"");
+    }
+
+    public TownGovernment(int id,String name,int corruption,int productivity,int society,int law,int lore,int crime,boolean special,String specialText)
     {
         this.id=id;
+        this.name=name;
         this.corruption=corruption;
         this.productivity=productivity;
         this.society=society;
@@ -31,7 +41,7 @@ public class TownGovernment
 
     public TownGovernment(TownGovernments g)
     {
-        this(g.ordinal(),g.CORRUPTION,g.PRODUCTIVITY,g.SOCIETY,g.LAW,g.LORE,g.CRIME,g.SPECIAL,g.SPECIAL_TEXT);
+        this(g.ordinal(),g.name().toLowerCase(),g.CORRUPTION,g.PRODUCTIVITY,g.SOCIETY,g.LAW,g.LORE,g.CRIME,g.SPECIAL,g.SPECIAL_TEXT);
     }
 
     public int getId()
@@ -42,6 +52,16 @@ public class TownGovernment
     public void setId(int id)
     {
         this.id = id;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name=name;
     }
 
     public int getCorruption()

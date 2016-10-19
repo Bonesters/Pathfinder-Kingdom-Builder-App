@@ -21,6 +21,14 @@ public class Quality
     private boolean special;
     private String specialText;
 
+    /**
+     * only use for deleting Building from the database.
+     */
+    public Quality(String name)
+    {
+        this(-1,name,0,0,0,0,0,0,0,0,0,0,false,"");
+    }
+
     public Quality(int id,String name,int corruption,int productivity,int society,int law,int lore,int crime,int spellMod,double bValMul,double purMul,int danger,boolean special,String specialText)
     {
         this.id=id;
