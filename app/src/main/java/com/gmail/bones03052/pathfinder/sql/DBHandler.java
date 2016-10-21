@@ -58,8 +58,6 @@ public class DBHandler extends SQLiteOpenHelper
     public static final String COL_SPECIAL="special";
     public static final String COL_SPECIAL_TEXT="special text";
 
-    public static final int CURRENT_VERSION=0;
-
     public DBHandler(Context context, String name,SQLiteDatabase.CursorFactory factory, int version)
     {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
