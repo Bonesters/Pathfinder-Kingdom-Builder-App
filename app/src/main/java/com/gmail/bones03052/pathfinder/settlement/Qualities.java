@@ -76,23 +76,20 @@ public enum Qualities
     public static final int MAX_LENGTH=2000;
 
 
-    public final double CORRUPTION;
-    public final double PRODUCTIVITY;
-    public final double SOCIETY;
-    public final double LAW;
-    public final double LORE;
-    public final double CRIME;
-    public final double SPELL_MODIFIER;
+    public final int CORRUPTION;
+    public final int PRODUCTIVITY;
+    public final int SOCIETY;
+    public final int LAW;
+    public final int LORE;
+    public final int CRIME;
+    public final int SPELL_MODIFIER;
     public final double BASE_VALUE_MULTIPLIER;
     public final double PURCHASE_MULTIPLIER;
-    public final double DANGER_MODIFIER;
+    public final int DANGER_MODIFIER;
     public final boolean SPECIAL;
     public final String SPECIAL_TEXT;
 
-    /**
-     * @param specialText 2000 character limit
-     */
-    Qualities(double corruption,double productivity,double society,double law,double lore,double crime,double sp,double bvm,double pm,double danger,boolean special,String specialText)
+    Qualities(int corruption,int productivity,int society,int law,int lore,int crime,int sp,double bvm,double pm,int danger,boolean special,String specialText)
     {
         this.CORRUPTION=corruption;
         this.PRODUCTIVITY=productivity;
@@ -105,7 +102,7 @@ public enum Qualities
         this.PURCHASE_MULTIPLIER=pm;
         this.DANGER_MODIFIER=danger;
         this.SPECIAL=special;
-        this.SPECIAL_TEXT=this.SPECIAL?((specialText.length()>MAX_LENGTH)?specialText.substring(0,MAX_LENGTH):specialText):"";
+        this.SPECIAL_TEXT=specialText;
     }
 
     @Override

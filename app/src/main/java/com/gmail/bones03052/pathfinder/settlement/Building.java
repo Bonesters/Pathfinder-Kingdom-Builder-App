@@ -26,10 +26,22 @@ public class Building
     private int lots;
     private int cost;
     private int buildTime;
+    private int housesRequired;
+    private boolean waterRequired;
     private boolean special;
     private String specialText;
+    private String upgrade;
+    private String discount;
 
-    public Building(int id,String name,int economy, int loyalty, int stability, int unrest, int corruption, int crime, int law, int lore, int society, int population, int fame, double infamy, int baseValue, int level, int productivity, int lots, int cost, int buildTime,boolean special,String specialText)
+    /**
+     * only use for deleting Building from the database.
+     */
+    public Building(String name)
+    {
+        this(-1,name,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,false,"","",false,"");
+    }
+
+    public Building(int id,String name,int economy, int loyalty, int stability, int unrest, int corruption, int crime, int law, int lore, int society, int population, int fame, double infamy, int baseValue, int level, int productivity, int lots, int cost, int buildTime,int housesRequired,boolean waterRequired,String upgrade,String discount,boolean special,String specialText)
     {
         this.id=id;
         this.name=name;
@@ -51,13 +63,17 @@ public class Building
         this.lots=lots;
         this.cost=cost;
         this.buildTime=buildTime;
+        this.housesRequired=housesRequired;
+        this.waterRequired=waterRequired;
+        this.upgrade=upgrade;
+        this.discount=discount;
         this.special=special;
         this.specialText=specialText;
     }
 
     public Building(BuildStat b)
     {
-        this(b.ordinal(),b.name().toLowerCase(),b.economy,b.loyalty,b.stability,b.unrest,b.corruption,b.crime,b.law,b.lore,b.society,b.population,b.fame,b.infamy,b.baseValue,b.level,b.productivity,b.lots,b.cost,b.buildTime,b.special,b.specialText);
+        this(b.ordinal(),b.name().toLowerCase(),b.economy,b.loyalty,b.stability,b.unrest,b.corruption,b.crime,b.law,b.lore,b.society,b.population,b.fame,b.infamy,b.baseValue,b.level,b.productivity,b.lots,b.cost,b.buildTime,b.getHousesRequired(),b.requiresWater(),b.getUpgrades(),b.getDiscounts(),b.special,b.specialText);
     }
 
     public int getId()
@@ -263,7 +279,7 @@ public class Building
     @Override
     public String toString()
     {
-        return "{"+id+","+name+","+economy+","+loyalty+","+stability+","+unrest+","+corruption+","+crime+","+law+","+lore+","+society+","+population+","+fame+","+infamy+","+baseValue+","+level+","+productivity+","+lots+","+cost+","+buildTime+"}";
+        return "{"+id+","+name+","+economy+","+loyalty+","+stability+","+unrest+","+corruption+","+crime+","+law+","+lore+","+society+","+population+","+fame+","+infamy+","+baseValue+","+level+","+productivity+","+lots+","+cost+","+buildTime+","+housesRequired+","+waterRequired+","+upgrade+","+discount+","+special+","+specialText+"}";
     }
 
     public boolean isSpecial()
@@ -297,5 +313,68 @@ public class Building
             special=true;
             this.specialText=specialText;
         }
+    }
+
+    public double getMonthlyCost()
+    {
+        return ((double)this.cost)/((double)this.buildTime);
+    }
+
+    /**
+     *
+     * @return the number of required adjacent houses. please note that 0 means no houses are allowed to be adjacent, and that -1 means no requirement.
+     */
+    public int getHousesRequired()
+    {
+        return this.housesRequired;
+    }
+
+    /**
+     *
+     * @param housesRequired the number of required adjacent houses. please note that 0 means no houses are allowed to be adjacent, and that -1 means no requirement.
+     */
+    public void setHousesRequired(int housesRequired)
+    {
+        this.housesRequired=housesRequired;
+    }
+
+    public boolean isWaterRequired()
+    {
+        return this.waterRequired;
+    }
+
+    public void setWaterRequired(boolean waterRequired)
+    {
+        this.waterRequired=waterRequired;
+    }
+
+    public boolean hasLimit()
+    {
+        return this.getHousesRequired()>=0||this.specialText.contains("Limit: ");
+    }
+
+    public boolean hasSpecial()
+    {
+        return this.specialText.contains("Special: ");
+    }
+
+    public String getUpgrade()
+    {
+        return this.upgrade;
+    }
+
+    public void setUpgrade(String upgrade)
+    {
+        this.upgrade=upgrade;
+    }
+
+    public String getDiscounts()
+    {
+        return this.discount;
+    }
+
+    public void setDiscounts(String discounts)
+    {
+        this.discount=discounts;
     }
 }

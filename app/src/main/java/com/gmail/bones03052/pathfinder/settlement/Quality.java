@@ -8,20 +8,28 @@ public class Quality
 {
     private int id;
     private String name;
-    private double corruption;
-    private double productivity;
-    private double society;
-    private double law;
-    private double lore;
-    private double crime;
-    private double spellMod;
+    private int corruption;
+    private int productivity;
+    private int society;
+    private int law;
+    private int lore;
+    private int crime;
+    private int spellMod;
     private double bValMul;
     private double purMul;
-    private double danger;
+    private int danger;
     private boolean special;
     private String specialText;
 
-    public Quality(int id,String name,double corruption,double productivity,double society,double law,double lore,double crime,double spellMod,double bValMul,double purMul,double danger,boolean special,String specialText)
+    /**
+     * only use for deleting Building from the database.
+     */
+    public Quality(String name)
+    {
+        this(-1,name,0,0,0,0,0,0,0,0,0,0,false,"");
+    }
+
+    public Quality(int id,String name,int corruption,int productivity,int society,int law,int lore,int crime,int spellMod,double bValMul,double purMul,int danger,boolean special,String specialText)
     {
         this.id=id;
         this.name=name;
@@ -64,72 +72,72 @@ public class Quality
         this.name = name;
     }
 
-    public double getCorruption()
+    public int getCorruption()
     {
         return corruption;
     }
 
-    public void setCorruption(double corruption)
+    public void setCorruption(int corruption)
     {
         this.corruption = corruption;
     }
 
-    public double getProductivity()
+    public int getProductivity()
     {
         return productivity;
     }
 
-    public void setProductivity(double productivity)
+    public void setProductivity(int productivity)
     {
         this.productivity = productivity;
     }
 
-    public double getSociety()
+    public int getSociety()
     {
         return society;
     }
 
-    public void setSociety(double society)
+    public void setSociety(int society)
     {
         this.society = society;
     }
 
-    public double getLaw()
+    public int getLaw()
     {
         return law;
     }
 
-    public void setLaw(double law)
+    public void setLaw(int law)
     {
         this.law = law;
     }
 
-    public double getLore()
+    public int getLore()
     {
         return lore;
     }
 
-    public void setLore(double lore)
+    public void setLore(int lore)
     {
         this.lore = lore;
     }
 
-    public double getCrime()
+    public int getCrime()
     {
         return crime;
     }
 
-    public void setCrime(double crime)
+    public void setCrime(int crime)
     {
         this.crime = crime;
     }
 
-    public double getSpellMod()
+    public int getSpellMod()
     {
         return spellMod;
     }
 
-    public void setSpellMod(double spellMod)
+    public void setSpellMod(int spellMod)
     {
         this.spellMod = spellMod;
     }
@@ -154,12 +162,12 @@ public class Quality
         this.purMul = purMul;
     }
 
-    public double getDanger()
+    public int getDanger()
     {
         return danger;
     }
 
-    public void setDanger(double danger)
+    public void setDanger(int danger)
     {
         this.danger = danger;
     }
@@ -198,4 +206,9 @@ public class Quality
     }
 
     //TODO: add toString()
+    @Override
+    public String toString()
+    {
+        return "{"+id+","+name+","+corruption+","+productivity+","+society+","+law+","+lore+","+crime+","+spellMod+","+bValMul+","+purMul+","+danger+","+special+","+specialText+"}";
+    }
 }
