@@ -20,12 +20,11 @@ import com.gmail.bones03052.pathfinder.settlement.TownGovernments;
 
 public class DBHandler extends SQLiteOpenHelper
 {
-    private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "settlements.db";
-    private static final String TABLE_BUILDINGS = "buildings";
-    private static final String TABLE_TOWN_GOVERNMENTS="town governments";
-    private static final String TABLE_QUALITIES="qualities";
-
+    public static final int DATABASE_VERSION = 1;
+    public static final String DATABASE_NAME = "settlements.db";
+    public static final String TABLE_BUILDINGS = "buildings";
+    public static final String TABLE_TOWN_GOVERNMENTS="town governments";
+    public static final String TABLE_QUALITIES="qualities";
     public static final String COL_ID="id";
     public static final String COL_NAME="name";
     public static final String COL_ECO="economy";
@@ -57,9 +56,11 @@ public class DBHandler extends SQLiteOpenHelper
     public static final String COL_SPECIAL="special";
     public static final String COL_SPECIAL_TEXT="special text";
 
+
+
     public DBHandler(Context context, String name,SQLiteDatabase.CursorFactory factory, int version)
     {
-        super(context, DATABASE_NAME, factory, DATABASE_VERSION);
+        super(context,name,factory,DATABASE_VERSION);
     }
 
     @Override
