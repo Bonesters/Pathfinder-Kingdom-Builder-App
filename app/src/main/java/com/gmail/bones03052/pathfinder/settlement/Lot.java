@@ -19,11 +19,6 @@ public class Lot
         return empty;
     }
 
-    public void setEmpty(boolean empty)
-    {
-        this.empty = empty;
-    }
-
     public Building getOccupant()
     {
         return occupant;
@@ -32,7 +27,16 @@ public class Lot
     public void setOccupant(Building occupant)
     {
         this.occupant = occupant;
-        shared=((occupant.getLots()>1)?true:false);
+        if(occupant==null)
+        {
+            empty=true;
+            shared=false;
+        }
+        else
+        {
+            empty=false;
+            shared=(occupant.getLots()>1);
+        }
     }
 
     public boolean isShared()

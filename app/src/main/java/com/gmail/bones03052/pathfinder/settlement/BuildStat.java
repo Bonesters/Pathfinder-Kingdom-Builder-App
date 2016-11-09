@@ -155,22 +155,22 @@ public enum BuildStat
     {
         switch (this)
         {
-            case ALCHEMIST:{return 1;}
-            case BLACK_MARKET:{return 2;}
-            case DANCE_HALL:{return 1;}
-            case DUMP:{return 0;}
-            case EXOTIC_ARTISAN:{return 1;}
-            case HERBALIST:{return 0;}
-            case INN:{return 0;}
-            case LUXURY_STORE:{return 1;}
-            case MAGIC_SHOP:{return 2;}
-            case MARKET:{return 2;}
-            case SHOP:{return 1;}
-            case STABLE:{return 1;}
-            case TANNERY:{return 0;}
-            case TAVERN:{return 1;}
-            case TRADE_SHOP:{return 1;}
-            default:{return -1;}
+            case ALCHEMIST:         {return 1;}
+            case BLACK_MARKET:      {return 2;}
+            case DANCE_HALL:        {return 1;}
+            case DUMP:              {return 0;}
+            case EXOTIC_ARTISAN:    {return 1;}
+            case HERBALIST:         {return 0;}
+            case INN:               {return 0;}
+            case LUXURY_STORE:      {return 1;}
+            case MAGIC_SHOP:        {return 2;}
+            case MARKET:            {return 2;}
+            case SHOP:              {return 1;}
+            case STABLE:            {return 1;}
+            case TANNERY:           {return 0;}
+            case TAVERN:            {return 1;}
+            case TRADE_SHOP:        {return 1;}
+            default:                {return -1;}
         }
     }
 
@@ -178,12 +178,12 @@ public enum BuildStat
     {
         switch(this)
         {
-            case FOUNDRY:{return true;}
-            case MILL:{return true;}
-            case PIER:{return true;}
-            case WATERFRONT:{return true;}
-            case WATERWAY:{return true;}
-            default:{return false;}
+            case FOUNDRY:       {return true;}
+            case MILL:          {return true;}
+            case PIER:          {return true;}
+            case WATERFRONT:    {return true;}
+            case WATERWAY:      {return true;}
+            default:            {return false;}
         }
     }
 
@@ -198,17 +198,17 @@ public enum BuildStat
         BuildStat[] upgrade;
         switch(this)
         {
-            case ACADEMY:{upgrade=new BuildStat[]{UNIVERSITY};break;}
-            case BARRACKS:{upgrade=new BuildStat[]{GARRISON};break;}
-            case LIBRARY:{upgrade=new BuildStat[]{ACADEMY};break;}
-            case LUXURY_STORE:{upgrade=new BuildStat[]{MAGIC_SHOP};break;}
-            case MANSION:{upgrade=new BuildStat[]{NOBLE_VILLA};break;}
-            case PIER:{upgrade=new BuildStat[]{WATERFRONT};break;}
-            case SHOP:{upgrade=new BuildStat[]{LUXURY_STORE,MARKET};break;}
-            case SHRINE:{upgrade=new BuildStat[]{TEMPLE};break;}
-            case TENEMENT:{upgrade=new BuildStat[]{HOUSE};break;}
-            case THEATER:{upgrade=new BuildStat[]{ARENA};break;}
-            case TRADE_SHOP:{upgrade=new BuildStat[]{TOWN_HALL};break;}
+            case ACADEMY:       {upgrade=new BuildStat[]{UNIVERSITY};           break;}
+            case BARRACKS:      {upgrade=new BuildStat[]{GARRISON};             break;}
+            case LIBRARY:       {upgrade=new BuildStat[]{ACADEMY};              break;}
+            case LUXURY_STORE:  {upgrade=new BuildStat[]{MAGIC_SHOP};           break;}
+            case MANSION:       {upgrade=new BuildStat[]{NOBLE_VILLA};          break;}
+            case PIER:          {upgrade=new BuildStat[]{WATERFRONT};           break;}
+            case SHOP:          {upgrade=new BuildStat[]{LUXURY_STORE,MARKET};  break;}
+            case SHRINE:        {upgrade=new BuildStat[]{TEMPLE};               break;}
+            case TENEMENT:      {upgrade=new BuildStat[]{HOUSE};                break;}
+            case THEATER:       {upgrade=new BuildStat[]{ARENA};                break;}
+            case TRADE_SHOP:    {upgrade=new BuildStat[]{TOWN_HALL};            break;}
             default:{return "";}
         }
         String s="{";
@@ -225,32 +225,32 @@ public enum BuildStat
         BuildStat[] discount;
         switch(this)
         {
-            case ACADEMY:{discount=new BuildStat[]{CASTERs_TOWER,LIBRARY,MAGIC_SHOP};break;}
-            case ARENA:{discount=new BuildStat[]{DANCE_HALL,GARRISON,INN,STABLE,THEATER};break;}
-            case BARDIC_COLLEGE:{discount=new BuildStat[]{LIBRARY,MUSEUM,THEATER};break;}
-            case BLACK_MARKET:{discount=new BuildStat[]{DANCE_HALL};break;}
-            case CASTLE:{discount=new BuildStat[]{NOBLE_VILLA,TOWN_HALL};break;}
-            case CATHEDRAL:{discount=new BuildStat[]{ACADEMY,TEMPLE};break;}
-            case COLOSSUS:{discount=new BuildStat[]{LIGHTHOUSE,MONUMENT,OBSERVATORY,PARK};break;}
-            case COURTHOUSE:{discount=new BuildStat[]{JAIL};break;}
-            case FOUNDRY:{discount=new BuildStat[]{SMITHY};break;}
-            case GARRISON:{discount=new BuildStat[]{CITY_WALLS,GRANARY,JAIL};break;}
-            case GUILDHALL:{discount=new BuildStat[]{PIER,STABLE,TRADE_SHOP};break;}
-            case HANGING_GARDENS:{discount=new BuildStat[]{MENAGERIE,MONUMENT,PARK,SACRED_GROVE};break;}
-            case LIGHTHOUSE:{discount=new BuildStat[]{PIER};break;}
-            case MAGICAL_ACADEMY:{discount=new BuildStat[]{CASTERs_TOWER,LIBRARY,MAGIC_SHOP};break;}
-            case MARKET:{discount=new BuildStat[]{BLACK_MARKET,INN,SHOP};break;}
-            case MILITARY_ACADEMY:{discount=new BuildStat[]{BARRACKS};break;}
-            case NOBLE_VILLA:{discount=new BuildStat[]{EXOTIC_ARTISAN,LUXURY_STORE,MANSION};break;}
-            case PALACE:{discount=new BuildStat[]{MANSION,MINT,NOBLE_VILLA};break;}
-            case SEWER_SYSTEM:{discount=new BuildStat[]{CISTERN,DUMP};break;}
-            case STOCKYARD:{discount=new BuildStat[]{STABLE,TANNERY};break;}
-            case TEMPLE:{discount=new BuildStat[]{GRAVEYARD,MONUMENT,SHRINE};break;}
-            case THEATER:{discount=new BuildStat[]{DANCE_HALL,EXOTIC_ARTISAN,INN,PARK,TAVERN};break;}
-            case TOWN_HALL:{discount=new BuildStat[]{BARRACKS,CISTERN,DUMP,JAIL,WATCHTOWER};break;}
-            case UNIVERSITY:{discount=new BuildStat[]{ACADEMY,BARDIC_COLLEGE,LIBRARY,MAGICAL_ACADEMY,MILITARY_ACADEMY,MUSEUM};break;}
-            case WATERFRONT:{discount=new BuildStat[]{BLACK_MARKET,GUILDHALL,PIER};break;}
-            default:{return "";}
+            case ACADEMY:           {discount=new BuildStat[]{CASTERs_TOWER,LIBRARY,MAGIC_SHOP};                                        break;}
+            case ARENA:             {discount=new BuildStat[]{DANCE_HALL,GARRISON,INN,STABLE,THEATER};                                  break;}
+            case BARDIC_COLLEGE:    {discount=new BuildStat[]{LIBRARY,MUSEUM,THEATER};                                                  break;}
+            case BLACK_MARKET:      {discount=new BuildStat[]{DANCE_HALL};                                                              break;}
+            case CASTLE:            {discount=new BuildStat[]{NOBLE_VILLA,TOWN_HALL};                                                   break;}
+            case CATHEDRAL:         {discount=new BuildStat[]{ACADEMY,TEMPLE};                                                          break;}
+            case COLOSSUS:          {discount=new BuildStat[]{LIGHTHOUSE,MONUMENT,OBSERVATORY,PARK};                                    break;}
+            case COURTHOUSE:        {discount=new BuildStat[]{JAIL};                                                                    break;}
+            case FOUNDRY:           {discount=new BuildStat[]{SMITHY};                                                                  break;}
+            case GARRISON:          {discount=new BuildStat[]{CITY_WALLS,GRANARY,JAIL};                                                 break;}
+            case GUILDHALL:         {discount=new BuildStat[]{PIER,STABLE,TRADE_SHOP};                                                  break;}
+            case HANGING_GARDENS:   {discount=new BuildStat[]{MENAGERIE,MONUMENT,PARK,SACRED_GROVE};                                    break;}
+            case LIGHTHOUSE:        {discount=new BuildStat[]{PIER};                                                                    break;}
+            case MAGICAL_ACADEMY:   {discount=new BuildStat[]{CASTERs_TOWER,LIBRARY,MAGIC_SHOP};                                        break;}
+            case MARKET:            {discount=new BuildStat[]{BLACK_MARKET,INN,SHOP};                                                   break;}
+            case MILITARY_ACADEMY:  {discount=new BuildStat[]{BARRACKS};                                                                break;}
+            case NOBLE_VILLA:       {discount=new BuildStat[]{EXOTIC_ARTISAN,LUXURY_STORE,MANSION};                                     break;}
+            case PALACE:            {discount=new BuildStat[]{MANSION,MINT,NOBLE_VILLA};                                                break;}
+            case SEWER_SYSTEM:      {discount=new BuildStat[]{CISTERN,DUMP};                                                            break;}
+            case STOCKYARD:         {discount=new BuildStat[]{STABLE,TANNERY};                                                          break;}
+            case TEMPLE:            {discount=new BuildStat[]{GRAVEYARD,MONUMENT,SHRINE};                                               break;}
+            case THEATER:           {discount=new BuildStat[]{DANCE_HALL,EXOTIC_ARTISAN,INN,PARK,TAVERN};                               break;}
+            case TOWN_HALL:         {discount=new BuildStat[]{BARRACKS,CISTERN,DUMP,JAIL,WATCHTOWER};                                   break;}
+            case UNIVERSITY:        {discount=new BuildStat[]{ACADEMY,BARDIC_COLLEGE,LIBRARY,MAGICAL_ACADEMY,MILITARY_ACADEMY,MUSEUM};  break;}
+            case WATERFRONT:        {discount=new BuildStat[]{BLACK_MARKET,GUILDHALL,PIER};                                             break;}
+            default:                {return "";}
         }
         String s="";
         for(BuildStat b:discount)
