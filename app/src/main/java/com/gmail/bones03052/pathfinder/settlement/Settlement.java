@@ -17,6 +17,15 @@ public class Settlement
     public static final int CHAOTIC_NEUTRAL=7;
     public static final int CHAOTIC_EVIL=8;
 
+    public static final int THORPE=0;
+    public static final int HAMLET=1;
+    public static final int VILLAGE=2;
+    public static final int SMALL_TOWN=3;
+    public static final int LARGE_TOWN=4;
+    public static final int SMALL_CITY=5;
+    public static final int LARGE_CITY=6;
+    public static final int METROPOLIS=7;
+
     private int alignment;
     private TownGovernment gov;
     private LinkedList<Quality> qual;
@@ -124,7 +133,7 @@ public class Settlement
 
     public int getCorruption()
     {
-        int corr=0;
+        int corr=getSizeMod();
         if(alignment%3==2)
         {
             corr++;
@@ -146,7 +155,7 @@ public class Settlement
 
     public int getCrime()
     {
-        int crime=0;
+        int crime=getSizeMod();
         if(alignment>=6)
         {
             crime++;
@@ -168,7 +177,7 @@ public class Settlement
 
     public int getLaw()
     {
-        int law=0;
+        int law=getSizeMod();
         if(alignment<=2)
         {
             law++;
@@ -190,14 +199,113 @@ public class Settlement
 
     public int getLore()
     {
-        int lore=0;
-
+        int lore=getSizeMod();
+        if(alignment%3==1)
+        {
+            lore++;
+            if(alignment==NEUTRAL)
+            {
+                lore++;
+            }
+        }
+        lore+=gov.getLore();
+        for(Quality q:qual)
+        {
+            lore+=q.getLore();
+        }
+        for(District d:districts)
+        {
+            for(Building b:d.getBuildings())
+            {
+                lore+=b.getLore();
+            }
+        }
         return lore;
+    }
+
+    public int getSociety()
+    {
+        int society=getSizeMod();
+        if(alignment%3==0)
+        {
+            society++;
+        }
+        society+=gov.getSociety();
+        for(Quality q:qual)
+        {
+            society+=q.getSociety();
+        }
+        for(District d:districts)
+        {
+            for(Building b:d.getBuildings())
+            {
+                society+=b.getSociety();
+            }
+        }
+        return society;
+    }
+
+    public int getPopulation()
+    {
+        int pop=0;
+        for(District d:districts)
+        {
+            for(Building b:d.getBuildings())
+            {
+                pop+=b.getPopulation();
+            }
+        }
+        return pop;
+    }
+
+    public int getFame()
+    {
+        int fame=0;
+        for(District d:districts)
+        {
+            for(Building b:d.getBuildings())
+            {
+                fame+=b.getFame();
+            }
+        }
+        return fame;
+    }
+
+    public double getInfamy()
+    {
+        double infamy=0;
+        for(District d:districts)
+        {
+            for(Building b:d.getBuildings())
+            {
+                infamy+=b.getInfamy();
+            }
+        }
+        return infamy;
+    }
+
+    public int getBaseValue()
+    {
+        int bval=getSizeBVal();
+        for(District d:districts)
+        {
+            for(Building b:d.getBuildings())
+            {
+                bval+=b.getBaseValue();
+            }
+        }
+        int bvalmul=1;
+        for(Quality q:qual)
+        {
+            bvalmul+=q.getbValMul();
+        }
+        bval*=bvalmul;
+        return bval;
     }
 
     public int getProductivity()
     {
-        int prod=0;
+        int prod=getSizeMod();
         prod+=gov.getProductivity();
         for(Quality q:qual)
         {
@@ -211,5 +319,105 @@ public class Settlement
             }
         }
         return prod;
+    }
+
+    public int getUsedLots()
+    {
+        int lots=0;
+        for(District d:districts)
+        {
+            for(Building b:d.getBuildings())
+            {
+                lots+=b.getLots();
+            }
+        }
+        return lots;
+    }
+
+    public int getBaseSpellcasterLevel()
+    {
+        int sl=getSize()+1;
+        for(Quality q:qual)
+        {
+            sl+=q.getSpellMod();
+        }
+        return sl;
+    }
+
+    /*
+        Thorpe	    Fewer than 20
+        Hamlet	    21–60
+        Village	    61–200
+        Small town	201–2,000
+        Large town	2,001–5,000
+        Small city	5,001–10,000
+        Large city	10,001–25,000
+        Metropolis
+    */
+    public int getSize()
+    {
+        int pop=getPopulation();
+        if(pop<20)
+        {
+            return THORPE;
+        }
+        else if(pop<=60)
+        {
+            return HAMLET;
+        }
+        else if(pop<=200)
+        {
+            return VILLAGE;
+        }
+        else if(pop<=2000)
+        {
+            return SMALL_TOWN;
+        }
+        else if(pop<=5000)
+        {
+            return LARGE_TOWN;
+        }
+        else if(pop<=10000)
+        {
+            return SMALL_CITY;
+        }
+        else if(pop<=25000)
+        {
+            return LARGE_CITY;
+        }
+        else
+        {
+            return METROPOLIS;
+        }
+    }
+
+    public int getSizeMod()
+    {
+        switch(getSize())
+        {
+            case THORPE:    {return -4;}
+            case HAMLET:    {return -2;}
+            case VILLAGE:   {return -1;}
+            case SMALL_CITY:{return 1;}
+            case LARGE_CITY:{return 2;}
+            case METROPOLIS:{return 4;}
+            default:        {return 0;}
+        }
+    }
+
+    public int getSizeBVal()
+    {
+        switch(getSize())
+        {
+            case THORPE:    {return 50;}
+            case HAMLET:    {return 200;}
+            case VILLAGE:   {return 500;}
+            case SMALL_TOWN:{return 1000;}
+            case LARGE_TOWN:{return 2000;}
+            case SMALL_CITY:{return 4000;}
+            case LARGE_CITY:{return 8000;}
+            case METROPOLIS:{return 16000;}
+            default:        {return 0;}
+        }
     }
 }
