@@ -1,5 +1,6 @@
 package com.gmail.bones03052.pathfinder.settlement;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 
 /**
@@ -56,6 +57,98 @@ public class Settlement
         return gov;
     }
 
+    public int getAlignment()
+    {
+        return alignment;
+    }
+
+    public boolean setAlignment(int alignment)
+    {
+        if(alignment>=0&&alignment<=8)
+        {
+            this.alignment=alignment;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public int getBaseQualityCount()
+    {
+        switch(getSize())
+        {
+            case THORPE:    {return 1;}
+            case HAMLET:    {return 1;}
+            case VILLAGE:   {return 2;}
+            case SMALL_TOWN:{return 2;}
+            case LARGE_TOWN:{return 3;}
+            case SMALL_CITY:{return 4;}
+            case LARGE_CITY:{return 5;}
+            case METROPOLIS:{return 6;}
+            default:        {return 0;}
+        }
+    }
+
+    public int getCurrentQualityCount()
+    {
+        return qual.size();
+    }
+
+    public int getBaseDanger()
+    {
+        switch(getSize())
+        {
+            case THORPE:    {return -10;}
+            case HAMLET:    {return -5;}
+            case VILLAGE:   {return 0;}
+            case SMALL_TOWN:{return 0;}
+            case LARGE_TOWN:{return 5;}
+            case SMALL_CITY:{return 5;}
+            case LARGE_CITY:{return 10;}
+            case METROPOLIS:{return 10;}
+            default:        {return 0;}
+        }
+    }
+
+    public int getDanger()
+    {
+        int danger=getBaseDanger();
+        for(Quality q:qual)
+        {
+            danger+=q.getDanger();
+        }
+        return danger;
+    }
+
+    public HashSet<String> getBuildingSpecials()
+    {
+        HashSet<String> specials=new HashSet<>();
+        for(District d:getDistricts())
+        {
+            for(Building b:d.getBuildings())
+            {
+                specials.add(b.getName()+" : "+b.getSpecial());
+            }
+        }
+        return specials;
+    }
+
+    public HashSet<String> getQualitySpecials()
+    {
+        HashSet<String> specials=new HashSet<>();
+        for(Quality q:qual)
+        {
+            specials.add(q.getName()+" : "+q.getSpecial());
+        }
+        return specials;
+    }
+
+    public String getGovernmentSpecial()
+    {
+        return gov.getSpecial();
+    }
 
     public LinkedList<Quality> getQual()
     {
@@ -332,6 +425,34 @@ public class Settlement
             }
         }
         return lots;
+    }
+
+    public int getPurchaseValue()
+    {
+        int pur=getBasePurchaseValue();
+        double purMul=1;
+        for(Quality q:qual)
+        {
+            purMul+=q.getPurMul();
+        }
+        pur*=purMul;
+        return pur;
+    }
+
+    public int getBasePurchaseValue()
+    {
+        switch(getSize())
+        {
+            case THORPE:    {return 500;}
+            case HAMLET:    {return 1000;}
+            case VILLAGE:   {return 2500;}
+            case SMALL_TOWN:{return 5000;}
+            case LARGE_TOWN:{return 10000;}
+            case SMALL_CITY:{return 25000;}
+            case LARGE_CITY:{return 50000;}
+            case METROPOLIS:{return 100000;}
+            default:        {return 0;}
+        }
     }
 
     public int getBaseSpellcasterLevel()

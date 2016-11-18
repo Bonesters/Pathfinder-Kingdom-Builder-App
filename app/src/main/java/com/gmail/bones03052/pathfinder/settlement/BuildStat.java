@@ -1,5 +1,7 @@
 package com.gmail.bones03052.pathfinder.settlement;
 
+import java.util.LinkedList;
+
 /**
  * Created by Dennis Champagne on 9/2/16.
  */
@@ -193,7 +195,7 @@ public enum BuildStat
         return (new Building(this)).toString();
     }
 
-    public String getUpgrades()
+    public LinkedList<Building> getUpgrades()
     {
         BuildStat[] upgrade;
         switch(this)
@@ -209,18 +211,29 @@ public enum BuildStat
             case TENEMENT:      {upgrade=new BuildStat[]{HOUSE};                break;}
             case THEATER:       {upgrade=new BuildStat[]{ARENA};                break;}
             case TRADE_SHOP:    {upgrade=new BuildStat[]{TOWN_HALL};            break;}
-            default:{return "";}
+            default:            {upgrade=null;                                  break;}
         }
-        String s="{";
+        LinkedList<Building> up=new LinkedList<>();
         for(BuildStat b:upgrade)
         {
-            s+=b.name().toLowerCase().replace("_"," ")+",";
+            up.add(new Building(b));
+        }
+        return up;
+    }
+
+    public String getStringUpgrades()
+    {
+        LinkedList<Building> upgrade=getUpgrades();
+        String s="{";
+        for(Building b:upgrade)
+        {
+            s+=b.getName().toLowerCase().replace("_"," ")+",";
         }
         s=s.substring(0,s.length()-1)+"}";
         return s;
     }
 
-    public String getDiscounts()
+    public LinkedList<Building> getDiscounts()
     {
         BuildStat[] discount;
         switch(this)
@@ -250,12 +263,23 @@ public enum BuildStat
             case TOWN_HALL:         {discount=new BuildStat[]{BARRACKS,CISTERN,DUMP,JAIL,WATCHTOWER};                                   break;}
             case UNIVERSITY:        {discount=new BuildStat[]{ACADEMY,BARDIC_COLLEGE,LIBRARY,MAGICAL_ACADEMY,MILITARY_ACADEMY,MUSEUM};  break;}
             case WATERFRONT:        {discount=new BuildStat[]{BLACK_MARKET,GUILDHALL,PIER};                                             break;}
-            default:                {return "";}
+            default:                {discount=null;                                                                                     break;}
         }
-        String s="";
+        LinkedList<Building> dis=new LinkedList<>();
         for(BuildStat b:discount)
         {
-            s+=b.name().toLowerCase().replace("_"," ")+",";
+            dis.add(new Building(b));
+        }
+        return dis;
+    }
+
+    public String getStringDiscounts()
+    {
+        LinkedList<Building> discount=getDiscounts();
+        String s="";
+        for(Building b:discount)
+        {
+            s+=b.getName().toLowerCase().replace("_"," ")+",";
         }
         s="{"+s.substring(0,s.length()-1)+"}";
         return s;
