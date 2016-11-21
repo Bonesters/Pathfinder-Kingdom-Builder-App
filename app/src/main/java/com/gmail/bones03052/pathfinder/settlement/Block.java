@@ -1,5 +1,9 @@
 package com.gmail.bones03052.pathfinder.settlement;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.LinkedList;
 
 /**
@@ -45,5 +49,34 @@ public class Block
             }
         }
         return b;
+    }
+
+    public JSONArray toJSONArray() throws JSONException
+    {
+        JSONArray object=new JSONArray();
+        LinkedList<Building> builds=getBuildings();
+        if(builds.size()>0)
+        {
+            for(Building b:builds)
+            {
+                JSONArray build=new JSONArray();
+                build.put(b.getId());
+                for(int i=0;i<2;i++)
+                {
+                    for(int j=0;j<2;j++)
+                    {
+                        if(getLot(i,j).getOccupant()==b)
+                        {
+                            JSONArray pos=new JSONArray();
+                            pos.put(i);
+                            pos.put(j);
+                            build.put(pos);
+                        }
+                    }
+                }
+                object.put(build);
+            }
+        }
+        return object;
     }
 }

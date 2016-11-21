@@ -1,5 +1,11 @@
 package com.gmail.bones03052.pathfinder.settlement;
 
+import com.gmail.bones03052.pathfinder.sql.DBHandler;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashSet;
 import java.util.LinkedList;
 
@@ -26,6 +32,10 @@ public class Settlement
     public static final int SMALL_CITY=5;
     public static final int LARGE_CITY=6;
     public static final int METROPOLIS=7;
+
+
+    public static final String ALIGN="align";
+    public static final String GOVERNMENT="gov";
 
     private int alignment;
     private TownGovernment gov;
@@ -539,6 +549,69 @@ public class Settlement
             case LARGE_CITY:{return 8000;}
             case METROPOLIS:{return 16000;}
             default:        {return 0;}
+        }
+    }
+
+
+    /*
+     * JSONObject
+     *  {
+     *      alignment,
+     *      government id,
+     *      JSONArray qualities
+     *      [
+     *          quality ids
+     *      ],
+     *      JSONArray districts
+     *      [
+     *          JSONArray blocks
+     *          [
+     *              JSONArray buildings
+     *              [
+     *                  building id,
+     *                  JSONArray positions
+     *                  [
+     *                      JSONArray coords
+     *                      [
+     *                          x,
+     *                          y
+     *                      ]
+     *                  ]
+     *              ]
+     *          ]
+     *      ]
+     *  }
+     */
+    public JSONObject toJSONObject() throws JSONException
+    {
+        JSONObject object=new JSONObject();
+        object.put(ALIGN,alignment);
+        object.put(GOVERNMENT,gov.getId());
+        JSONArray quals=new JSONArray();
+        for(Quality q:qual)
+        {
+            quals.put(q.getId());
+        }
+        object.put(DBHandler.TABLE_QUALITIES,quals);
+        JSONArray districts=new JSONArray();
+        for(District d:this.districts)
+        {
+            districts.put(d.toJSONArray());
+        }
+        object.put(DBHandler.TABLE_BUILDINGS,districts);
+        return object;
+    }
+
+    @Override
+    public String toString()
+    {
+        try
+        {
+            return toJSONObject().toString();
+        }
+        catch(JSONException e)
+        {
+            return "JSONException";
         }
     }
 }

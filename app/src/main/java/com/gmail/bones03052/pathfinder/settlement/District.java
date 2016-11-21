@@ -1,5 +1,8 @@
 package com.gmail.bones03052.pathfinder.settlement;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.util.LinkedList;
 
 /**
@@ -48,5 +51,18 @@ public class District
             }
         }
         return b;
+    }
+
+    public JSONArray toJSONArray() throws JSONException
+    {
+        JSONArray object=new JSONArray();
+        for(int i=0;i<3;i++)
+        {
+            for(int j=0;j<3;j++)
+            {
+                object.put(blocks[i][j].toJSONArray());
+            }
+        }
+        return object;
     }
 }
