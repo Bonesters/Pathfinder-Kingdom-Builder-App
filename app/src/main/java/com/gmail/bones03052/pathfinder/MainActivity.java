@@ -24,7 +24,9 @@ public class MainActivity extends AppCompatActivity
     private DBHandler database;
     private LinkedList<Settlement> settlements=new LinkedList<>();
 
-    //TODO: entire graphical interface...
+    //TODO: 1) Finish tabs in graphical interface
+    //TODO: 2) Find a way to create new tabs on settlement creation
+    //TODO: 3) Add new settlements to the options menu after creation
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

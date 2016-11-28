@@ -2,9 +2,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.gmail.bones03052.pathfinder.gui.SettlementOverviewTabbedActivity">
+
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_new_settlement"
+        android:orderInCategory="1"
+        android:title="@string/action_new_settlement"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_settlement0"
+        android:orderInCategory="1"
+        android:title="@string/action_settlement0"
+        app:showAsAction="always" />
+
+
 </menu>

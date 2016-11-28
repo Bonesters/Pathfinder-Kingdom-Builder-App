@@ -1,8 +1,6 @@
 package com.gmail.bones03052.pathfinder.gui;
 
-import android.support.design.widget.TabLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -16,7 +14,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.TextView;
 
 import com.gmail.bones03052.pathfinder.R;
@@ -37,6 +34,9 @@ public class SettlementOverviewTabbedActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+
+    // The counter for how many settlements have been added
+    private int settlementCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +76,11 @@ public class SettlementOverviewTabbedActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            return true;
+        }
+
+        if (id == R.id.action_new_settlement) {
+            //makeNewSettlement();
             return true;
         }
 
@@ -152,5 +157,14 @@ public class SettlementOverviewTabbedActivity extends AppCompatActivity {
             }
             return null;
         }
+    }
+
+    public void makeNewSettlement(Menu menu) {
+        settlementCount++;
+
+       // menu.onPrepareOptionsMenu (Menu menu) {
+
+      //  }
+
     }
 }
