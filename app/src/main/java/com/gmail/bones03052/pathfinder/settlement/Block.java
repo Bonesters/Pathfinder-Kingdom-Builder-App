@@ -1,8 +1,9 @@
 package com.gmail.bones03052.pathfinder.settlement;
 
+import com.gmail.bones03052.pathfinder.sql.DBHandler;
+
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.LinkedList;
 
@@ -20,6 +21,29 @@ public class Block
             for(int j=0;j<2;j++)
             {
                 lots[i][j]=new Lot();
+            }
+        }
+    }
+
+    public Block(JSONArray block,DBHandler database) throws JSONException
+    {
+        for(int i=0;i<2;i++)
+        {
+            for(int j=0;j<2;j++)
+            {
+                lots[i][j]=new Lot();
+            }
+        }
+        for(int i=0;i<block.length();i++)
+        {
+            JSONArray builds=block.getJSONArray(i);
+            Building b=database.findBuilding(builds.getInt(0));
+            JSONArray pos=builds.getJSONArray(1);
+            for(int j=0;j<pos.length();j++)
+            {
+                int x=pos.getJSONArray(j).getInt(0);
+                int y=pos.getJSONArray(j).getInt(0);
+                lots[x][y].setOccupant(b);
             }
         }
     }

@@ -41,6 +41,7 @@ public class Settlement
     private TownGovernment gov;
     private LinkedList<Quality> qual;
     private LinkedList<District> districts;
+
     public Settlement()
     {
         alignment=4;
@@ -55,6 +56,74 @@ public class Settlement
         gov=g;
         qual=q;
         districts=d;
+    }
+
+    /*
+     * JSONObject
+     *  {
+     *      alignment,
+     *      government id,
+     *      JSONArray qualities
+     *      [
+     *          quality ids
+     *      ],
+     *      JSONArray districts
+     *      [
+     *          JSONArray blocks
+     *          [
+     *              JSONArray buildings
+     *              [
+     *                  building id,
+     *                  JSONArray positions
+     *                  [
+     *                      JSONArray coords
+     *                      [
+     *                          x,
+     *                          y
+     *                      ]
+     *                  ]
+     *              ]
+     *          ]
+     *      ]
+     *  }
+     */
+
+    public Settlement(JSONObject sett,DBHandler database) throws JSONException
+    {
+        this.alignment=sett.getInt(ALIGN);
+        this.gov=database.findTownGovernment(sett.getInt(GOVERNMENT));
+        this.qual=new LinkedList<>();
+        JSONArray quals=sett.getJSONArray(database.TABLE_QUALITIES);
+        for(int i=0;i<quals.length();i++)
+        {
+            this.qual.add(database.findQuality(quals.getInt(i)));
+        }
+        this.districts=new LinkedList<>();
+        JSONArray dist=sett.getJSONArray(database.TABLE_BUILDINGS);
+        for(int i=0;i<dist.length();i++)
+        {
+            this.districts.add(new District(dist.getJSONArray(i),database));
+        }
+    }
+
+    public JSONObject toJSONObject() throws JSONException
+    {
+        JSONObject object=new JSONObject();
+        object.put(ALIGN,alignment);
+        object.put(GOVERNMENT,gov.getId());
+        JSONArray quals=new JSONArray();
+        for(Quality q:qual)
+        {
+            quals.put(q.getId());
+        }
+        object.put(DBHandler.TABLE_QUALITIES,quals);
+        JSONArray districts=new JSONArray();
+        for(District d:this.districts)
+        {
+            districts.put(d.toJSONArray());
+        }
+        object.put(DBHandler.TABLE_BUILDINGS,districts);
+        return object;
     }
 
     public void setTownGovernment(TownGovernment g)
@@ -552,55 +621,6 @@ public class Settlement
         }
     }
 
-
-    /*
-     * JSONObject
-     *  {
-     *      alignment,
-     *      government id,
-     *      JSONArray qualities
-     *      [
-     *          quality ids
-     *      ],
-     *      JSONArray districts
-     *      [
-     *          JSONArray blocks
-     *          [
-     *              JSONArray buildings
-     *              [
-     *                  building id,
-     *                  JSONArray positions
-     *                  [
-     *                      JSONArray coords
-     *                      [
-     *                          x,
-     *                          y
-     *                      ]
-     *                  ]
-     *              ]
-     *          ]
-     *      ]
-     *  }
-     */
-    public JSONObject toJSONObject() throws JSONException
-    {
-        JSONObject object=new JSONObject();
-        object.put(ALIGN,alignment);
-        object.put(GOVERNMENT,gov.getId());
-        JSONArray quals=new JSONArray();
-        for(Quality q:qual)
-        {
-            quals.put(q.getId());
-        }
-        object.put(DBHandler.TABLE_QUALITIES,quals);
-        JSONArray districts=new JSONArray();
-        for(District d:this.districts)
-        {
-            districts.put(d.toJSONArray());
-        }
-        object.put(DBHandler.TABLE_BUILDINGS,districts);
-        return object;
-    }
 
     @Override
     public String toString()

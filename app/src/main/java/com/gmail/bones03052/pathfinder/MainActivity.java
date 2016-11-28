@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity
     {
         JSONObject object=new JSONObject();
 
-        //any data you need to save can be put in the object also.
+        //greg, any data you need to save can be put in the object also.
 
 
         JSONArray sett=new JSONArray();
@@ -47,6 +47,25 @@ public class MainActivity extends AppCompatActivity
             sett.put(s.toJSONObject());
         }
         object.put(SETLEMENTS,sett);
+        //TODO: save custom buildings/qualities/governments to database.
         return object;
+    }
+
+    public LinkedList<Settlement> load(JSONObject data)
+    {
+        LinkedList<Settlement> settlements=new LinkedList<>();
+        try
+        {
+            JSONArray sett=data.getJSONArray(SETLEMENTS);
+            for(int i=0;i<sett.length();i++)
+            {
+                settlements.add(new Settlement(sett.getJSONObject(i),database));
+            }
+        }
+        catch(JSONException e)
+        {
+            e.printStackTrace();
+        }
+        return settlements;
     }
 }

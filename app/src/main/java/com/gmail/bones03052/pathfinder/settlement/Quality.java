@@ -205,7 +205,6 @@ public class Quality
         }
     }
 
-    //TODO: add toString()
     @Override
     public String toString()
     {

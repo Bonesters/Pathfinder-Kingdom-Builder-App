@@ -1,5 +1,7 @@
 package com.gmail.bones03052.pathfinder.settlement;
 
+import com.gmail.bones03052.pathfinder.sql.DBHandler;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -24,6 +26,17 @@ public class District
             for(int j=0;j<3;j++)
             {
                 blocks[i][j]=new Block();
+            }
+        }
+    }
+
+    public District(JSONArray dist,DBHandler database) throws JSONException
+    {
+        for(int i=0;i<3;i++)
+        {
+            for(int j=0;j<3;j++)
+            {
+                blocks[i][j]=new Block(dist.getJSONArray((i*3)+j),database);
             }
         }
     }
