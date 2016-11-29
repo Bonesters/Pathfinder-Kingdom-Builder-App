@@ -1,5 +1,6 @@
 package com.gmail.bones03052.pathfinder.gui;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -80,7 +81,7 @@ public class SettlementOverviewTabbedActivity extends AppCompatActivity {
         }
 
         if (id == R.id.action_new_settlement) {
-            //makeNewSettlement();
+            makeNewSettlement();
             return true;
         }
 
@@ -159,12 +160,11 @@ public class SettlementOverviewTabbedActivity extends AppCompatActivity {
         }
     }
 
-    public void makeNewSettlement(Menu menu) {
+    public void makeNewSettlement() {
         settlementCount++;
 
-       // menu.onPrepareOptionsMenu (Menu menu) {
-
-      //  }
+        Intent intent = new Intent();
+        //intent.setClass(SettlementOverviewTabbedActivity.this, )
 
     }
 }
