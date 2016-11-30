@@ -9,9 +9,13 @@ import android.widget.TextView;
 import com.gmail.bones03052.pathfinder.gui.ItemFragment.OnListFragmentInteractionListener;
 import com.gmail.bones03052.pathfinder.gui.dummy.DummyContent.DummyItem;
 
+import com.gmail.bones03052.pathfinder.R;
+
 import java.util.List;
 
-/**
+/*
+ *
+ *
  * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
