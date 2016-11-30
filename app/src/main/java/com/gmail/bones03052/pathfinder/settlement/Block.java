@@ -27,13 +27,7 @@ public class Block
 
     public Block(JSONArray block,DBHandler database) throws JSONException
     {
-        for(int i=0;i<2;i++)
-        {
-            for(int j=0;j<2;j++)
-            {
-                lots[i][j]=new Lot();
-            }
-        }
+        this();
         for(int i=0;i<block.length();i++)
         {
             JSONArray builds=block.getJSONArray(i);

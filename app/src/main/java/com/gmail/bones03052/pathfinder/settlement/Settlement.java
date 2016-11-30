@@ -126,6 +126,11 @@ public class Settlement
         return object;
     }
 
+    public TownGovernment getGovernment()
+    {
+        return gov;
+    }
+
     public void setTownGovernment(TownGovernment g)
     {
         this.gov=g;
