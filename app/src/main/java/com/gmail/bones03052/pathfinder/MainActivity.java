@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity
         catch (Exception e)
         {
             e.printStackTrace();
+            settlements=new LinkedList<>();
         }
     }
 
