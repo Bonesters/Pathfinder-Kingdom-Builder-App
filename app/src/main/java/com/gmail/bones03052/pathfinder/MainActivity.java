@@ -48,10 +48,10 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         database=new DBHandler(this,DBHandler.DATABASE_NAME,null,DBHandler.DATABASE_VERSION);
         //TODO: read data in.
-        loadSettlements();
+        load();
     }
 
-    private void loadSettlements()
+    private void load()
     {
         try
         {
