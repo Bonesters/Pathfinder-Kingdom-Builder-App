@@ -18,7 +18,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStreamReader;
 import java.util.LinkedList;
 
 /**
@@ -45,6 +48,27 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         database=new DBHandler(this,DBHandler.DATABASE_NAME,null,DBHandler.DATABASE_VERSION);
         //TODO: read data in.
+        loadSettlements();
+    }
+
+    private void loadSettlements()
+    {
+        try
+        {
+            FileInputStream in=openFileInput(SAVE_DATA_FILENAME);
+            BufferedReader b=new BufferedReader(new InputStreamReader(in));
+            String data="";
+            while(b.ready())
+            {
+                data+=b.readLine()+"\n";
+            }
+            JSONObject json=new JSONObject(data);
+            settlements=loadSettlements(json);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     private void save()
@@ -169,7 +193,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public LinkedList<Settlement> load(JSONObject data)
+    public LinkedList<Settlement> loadSettlements(JSONObject data)
     {
         LinkedList<Settlement> settlements=new LinkedList<>();
         try
