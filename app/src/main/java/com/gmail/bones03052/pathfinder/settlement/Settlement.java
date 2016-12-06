@@ -36,8 +36,10 @@ public class Settlement
 
     public static final String ALIGN="align";
     public static final String GOVERNMENT="gov";
+    public static final String NAME="name";
 
     private int alignment;
+    private String name;
     private TownGovernment gov;
     private LinkedList<Quality> qual;
     private LinkedList<District> districts;
@@ -56,6 +58,12 @@ public class Settlement
         gov=g;
         qual=q;
         districts=d;
+    }
+
+    public Settlement(String name,TownGovernment g,LinkedList<Quality> q,LinkedList<District> d,int alignment)
+    {
+        this(g,q,d,alignment);
+        this.name=name;
     }
 
     /*
@@ -90,6 +98,7 @@ public class Settlement
 
     public Settlement(JSONObject sett,DBHandler database) throws JSONException
     {
+        this.name=sett.getString(NAME);
         this.alignment=sett.getInt(ALIGN);
         this.gov=database.findTownGovernment(sett.getInt(GOVERNMENT));
         this.qual=new LinkedList<>();
@@ -109,6 +118,7 @@ public class Settlement
     public JSONObject toJSONObject() throws JSONException
     {
         JSONObject object=new JSONObject();
+        object.put(NAME,name);
         object.put(ALIGN,alignment);
         object.put(GOVERNMENT,gov.getId());
         JSONArray quals=new JSONArray();
@@ -638,5 +648,15 @@ public class Settlement
         {
             return "JSONException";
         }
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name=name;
     }
 }
