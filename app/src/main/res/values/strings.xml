@@ -9,9 +9,11 @@
     <string name="action_settings">Settings</string>
     <string name="action_new_settlement">Add New Settlement</string>
     <string name="action_settlement0">Settlement 0</string>
+    <string name="action_view_current">View Settlement List</string>
 
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="welcomeText">Welcome to the Pathfinder Kingdom Manager App!</string>
+    <string name="welcomeBeginText">To begin, select \'Add New Settlement\' from the dropdown menu, otherwise, select \'View Settlement List\'!</string>
     <string name="welcomeSettlementNumText">Active Settlements:</string>
     <string name="welcomeDistrictNumText">Total Active Districts:</string>
 </resources>

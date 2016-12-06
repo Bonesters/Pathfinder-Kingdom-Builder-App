@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.gmail.bones03052.pathfinder.gui.SettlementFragment;
 import com.gmail.bones03052.pathfinder.settlement.BuildStat;
 import com.gmail.bones03052.pathfinder.settlement.Building;
 import com.gmail.bones03052.pathfinder.settlement.District;
@@ -24,6 +25,12 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
+
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.view.Menu;
+import android.view.MenuItem;
 
 /**
  * Created by Dennis Champagne on 9/2/16.
@@ -56,6 +63,63 @@ public class MainActivity extends AppCompatActivity
         transaction.replace(R.id.container, fragment1);
         transaction.commit();
         */
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        if (id == R.id.action_add_new) {
+            //TODO: spawn a new settlement fragment and add it to the list
+            return true;
+        }
+
+        if (id == R.id.action_view_current) {
+            //TODO: spawn a new fragment that displays the settlements
+
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction transaction = fm.beginTransaction();
+            Fragment fragment1 = new SettlementFragment();
+            //transaction.replace(R.id.container, fragment1);
+            transaction.commit();
+
+            /*
+
+            //Within the fragment do this:
+                // Inflate the layout for this fragment
+                View rootView = inflater.inflate(R.layout.fragment1_main, container, false);
+
+                Button myBtn = (Button) rootView.findViewById(R.id.myBtn1);
+                myBtn.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        FragmentManager fm = getActivity().getSupportFragmentManager();
+                        FragmentTransaction transaction = fm.beginTransaction();
+                        Fragment fragment2 = new MyFragment2();
+                        transaction.replace(R.id.container, fragment2);
+                        transaction.commit();
+                    }
+                } );
+
+                return rootView;
+
+            */
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
