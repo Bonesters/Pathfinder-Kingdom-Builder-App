@@ -3,6 +3,7 @@ package com.gmail.bones03052.pathfinder;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.gmail.bones03052.pathfinder.settlement.BuildStat;
 import com.gmail.bones03052.pathfinder.settlement.Building;
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onPause()
     {
+        super.onPause();
         save();
     }
 
@@ -79,6 +81,7 @@ public class MainActivity extends AppCompatActivity
             }
             JSONObject json=new JSONObject(data);
             settlements=loadSettlements(json);
+            Log.v("Pathfinder-settlement:","successfully loaded saved data (hopefully).");
         }
         catch (Exception e)
         {
@@ -145,6 +148,7 @@ public class MainActivity extends AppCompatActivity
         {
             database.addTownGovernment(g);
         }
+        Log.v("Pathfinder-settlement:","saved "+newGovs.size()+" custom governments.");
     }
 
     private void saveQualities()
@@ -174,6 +178,7 @@ public class MainActivity extends AppCompatActivity
         {
             database.addQuality(q);
         }
+        Log.v("Pathfinder-settlement:","saved "+newQualities.size()+" custom qualities.");
     }
 
     private void saveBuildings()
@@ -206,6 +211,7 @@ public class MainActivity extends AppCompatActivity
         {
             database.addBuilding(b);
         }
+        Log.v("Pathfinder-settlement:","saved "+newBuildings.size()+" custom buildings.");
     }
 
     public LinkedList<Settlement> loadSettlements(JSONObject data)
