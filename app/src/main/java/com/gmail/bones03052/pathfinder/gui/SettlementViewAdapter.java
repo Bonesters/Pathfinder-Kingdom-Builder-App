@@ -6,26 +6,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.gmail.bones03052.pathfinder.gui.ItemFragment.OnListFragmentInteractionListener;
-import com.gmail.bones03052.pathfinder.gui.dummy.DummyContent.DummyItem;
-
+import com.gmail.bones03052.pathfinder.gui.SettlementFragment.OnListFragmentInteractionListener;
+import com.gmail.bones03052.pathfinder.gui.SettlementList.SettlementItem;
+import java.util.List;
 import com.gmail.bones03052.pathfinder.R;
 
-import java.util.List;
-
-/*
- *
- *
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
+/**
+ * {@link RecyclerView.Adapter} that can display a {@link SettlementItem} and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class MySettlementRecyclerViewAdapter extends RecyclerView.Adapter<MySettlementRecyclerViewAdapter.ViewHolder> {
+public class SettlementViewAdapter extends RecyclerView.Adapter<SettlementViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private final List<SettlementItem> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public MySettlementRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public SettlementViewAdapter(List<SettlementItem> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -33,7 +29,7 @@ public class MySettlementRecyclerViewAdapter extends RecyclerView.Adapter<MySett
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_item, parent, false);
+                .inflate(R.layout.fragment_settlement, parent, false);
         return new ViewHolder(view);
     }
 
@@ -64,7 +60,7 @@ public class MySettlementRecyclerViewAdapter extends RecyclerView.Adapter<MySett
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
-        public DummyItem mItem;
+        public SettlementItem mItem;
 
         public ViewHolder(View view) {
             super(view);

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.gmail.bones03052.pathfinder.gui.SettlementFragment;
 import com.gmail.bones03052.pathfinder.settlement.BuildStat;
 import com.gmail.bones03052.pathfinder.settlement.Building;
 import com.gmail.bones03052.pathfinder.settlement.District;
@@ -24,6 +25,10 @@ import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+
 /**
  * Created by Dennis Champagne on 9/2/16.
  */
@@ -39,7 +44,6 @@ public class MainActivity extends AppCompatActivity
 
     //TODO: 1) Finish tabs in graphical interface
     //TODO: 2) Find a way to create new tabs on settlement creation
-    //TODO: 3) Add new settlements to the options menu after creation
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -64,6 +68,15 @@ public class MainActivity extends AppCompatActivity
             }
             JSONObject json=new JSONObject(data);
             settlements=loadSettlements(json);
+
+            //TODO: spawn a new fragment that displays the settlements
+            /*
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction transaction = fm.beginTransaction();
+            Fragment fragment1 = new SettlementFragment();
+            transaction.replace(R.id.container, fragment1);
+            transaction.commit();
+            */
         }
         catch (Exception e)
         {
