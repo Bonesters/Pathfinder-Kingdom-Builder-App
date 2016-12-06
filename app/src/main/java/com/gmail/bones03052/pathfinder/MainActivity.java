@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.gmail.bones03052.pathfinder.gui.SettlementFragment;
 import com.gmail.bones03052.pathfinder.settlement.BuildStat;
 import com.gmail.bones03052.pathfinder.settlement.Building;
 import com.gmail.bones03052.pathfinder.settlement.District;
@@ -24,10 +23,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
-
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 
 /**
  * Created by Dennis Champagne on 9/2/16.
@@ -51,10 +46,26 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         database=new DBHandler(this,DBHandler.DATABASE_NAME,null,DBHandler.DATABASE_VERSION);
-        //TODO: read data in.
         load();
+        //TODO: spawn a new fragment that displays the settlements
+        /*
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        Fragment fragment1 = new SettlementFragment();
+        transaction.replace(R.id.container, fragment1);
+        transaction.commit();
+        */
     }
 
+    @Override
+    protected void onPause()
+    {
+        save();
+    }
+
+    /**
+     * this method loads the data from the JSON file. (avoid using it for anything else)
+     */
     private void load()
     {
         try
@@ -68,15 +79,6 @@ public class MainActivity extends AppCompatActivity
             }
             JSONObject json=new JSONObject(data);
             settlements=loadSettlements(json);
-
-            //TODO: spawn a new fragment that displays the settlements
-            /*
-            FragmentManager fm = getSupportFragmentManager();
-            FragmentTransaction transaction = fm.beginTransaction();
-            Fragment fragment1 = new SettlementFragment();
-            transaction.replace(R.id.container, fragment1);
-            transaction.commit();
-            */
         }
         catch (Exception e)
         {
@@ -112,7 +114,6 @@ public class MainActivity extends AppCompatActivity
             sett.put(s.toJSONObject());
         }
         object.put(SETLEMENTS,sett);
-
         saveBuildings();
         saveQualities();
         saveGovernments();
