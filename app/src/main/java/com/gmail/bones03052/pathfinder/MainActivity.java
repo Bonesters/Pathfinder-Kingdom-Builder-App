@@ -73,8 +73,8 @@ public class MainActivity extends AppCompatActivity implements SettlementFragmen
     private DBHandler database;
     private LinkedList<Settlement> settlements=new LinkedList<>();
 
-    //TODO: 1) Finish tabs in graphical interface
-    //TODO: 2) Find a way to create new tabs on settlement creation
+    //TODO: 1) Finish tab for district fragment connectivity in settlement viewer
+    //TODO: 2) Connect the intent and bundle in onListFragmentInteraction with the settlement viewer
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

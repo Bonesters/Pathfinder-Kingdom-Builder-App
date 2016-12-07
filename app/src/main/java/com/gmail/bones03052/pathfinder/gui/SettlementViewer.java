@@ -16,6 +16,8 @@ public class SettlementViewer extends Fragment {
         // Required empty public constructor
     }
 
+    //TODO: Acquire bundle and use int to find proper settlement, then load it into view
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
