@@ -1,5 +1,8 @@
 package com.gmail.bones03052.pathfinder.gui;
 
+import com.gmail.bones03052.pathfinder.MainActivity;
+import com.gmail.bones03052.pathfinder.settlement.Settlement;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +31,15 @@ public class SettlementList
 
     private static SettlementItem createSettlementItem(int position)
     {
-        return new SettlementItem(position,"Settlement "+position);
+        try
+        {
+            Settlement s=MainActivity.settlements.get(position-1);
+            return new SettlementItem(position,"Settlement: \""+s.getName()+"\"\tDistricts: "+s.getDistricts().size());
+        }
+        catch(Exception e)
+        {
+            return new SettlementItem(position,"Settlement "+position);
+        }
     }
 
 

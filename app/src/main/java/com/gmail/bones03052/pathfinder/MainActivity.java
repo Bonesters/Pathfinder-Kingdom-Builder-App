@@ -35,6 +35,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 /*
@@ -115,55 +116,101 @@ public class MainActivity extends AppCompatActivity implements SettlementFragmen
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-        int id=item.getItemId();
-
-        if(id==R.id.action_settings)
+        switch(item.getItemId())
         {
-            return true;
-        }
-
-        if(id==R.id.action_add_new)
-        {
-            //TODO: spawn a new settlement fragment and add it to the list
-            FragmentManager fm=getSupportFragmentManager();
-            FragmentTransaction transaction=fm.beginTransaction();
-            Fragment fragment=new SettlementViewer();
-            TextView t1=(TextView)findViewById(R.id.textView);
-            TextView t2=(TextView)findViewById(R.id.textView2);
-            t1.setAlpha(0.0f);
-            t2.setAlpha(0.0f);
-            t1.setEnabled(false);
-            t2.setEnabled(false);
-            transaction.replace(R.id.container,fragment);
-            transaction.commit();
-
-            return true;
-        }
-
-        if(id==R.id.action_view_current)
-        {
-            //TODO: spawn a new fragment that displays the settlements
-            try
+            case (R.id.action_settings):
             {
-
-                FragmentManager fm=getSupportFragmentManager();
-                FragmentTransaction transaction=fm.beginTransaction();
-                Fragment fragment1=new SettlementFragment();
-                TextView t1=(TextView)findViewById(R.id.textView);
-                TextView t2=(TextView)findViewById(R.id.textView2);
-                t1.setEnabled(false);
-                t2.setEnabled(false);
-                transaction.replace(R.id.container,fragment1);
-                transaction.commit();
+                return true;
             }
-            catch(Exception e)
+            case (R.id.action_add_new):
             {
-                e.printStackTrace();
+                try
+                {
+                    FragmentManager fm=getSupportFragmentManager();
+                    FragmentTransaction transaction=fm.beginTransaction();
+                    Fragment fragment=new SettlementViewer();
+                    transaction.replace(R.id.container,fragment);
+                    transaction.commit();
+                    TextView t1=(TextView)findViewById(R.id.textView);
+                    TextView t2=(TextView)findViewById(R.id.textView2);
+                    FrameLayout f=(FrameLayout)findViewById(R.id.container);
+                    t1.setAlpha(0.0f);
+                    t2.setAlpha(0.0f);
+                    f.setAlpha(1.0f);
+                    t1.setEnabled(false);
+                    t2.setEnabled(false);
+                    f.setEnabled(true);
+                    findViewById(R.id.settlementNameEdit).setEnabled(true);
+                    findViewById(R.id.alignSpinner).setEnabled(true);
+                    findViewById(R.id.govSpinner).setEnabled(true);
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace();
+                }
+                return true;
             }
-            return true;
-        }
 
-        return super.onOptionsItemSelected(item);
+            case (R.id.action_view_current):
+            {
+                try
+                {
+                    FragmentManager fm=getSupportFragmentManager();
+                    FragmentTransaction transaction=fm.beginTransaction();
+                    Fragment fragment1=new SettlementFragment();
+                    transaction.replace(R.id.container,fragment1);
+                    transaction.commit();
+                    TextView t1=(TextView)findViewById(R.id.textView);
+                    TextView t2=(TextView)findViewById(R.id.textView2);
+                    FrameLayout f=(FrameLayout)findViewById(R.id.container);
+                    t1.setAlpha(0.0f);
+                    t2.setAlpha(0.0f);
+                    f.setAlpha(1.0f);
+                    t1.setEnabled(false);
+                    t2.setEnabled(false);
+                    f.setEnabled(true);
+                    findViewById(R.id.settlementNameEdit).setEnabled(true);
+                    findViewById(R.id.alignSpinner).setEnabled(true);
+                    findViewById(R.id.govSpinner).setEnabled(true);
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace();
+                }
+                return true;
+            }
+            case(R.id.action_goto_home):
+            {
+                //TODO: have this button go back home. not sure if this works yet.
+                try
+                {
+                    FragmentManager fm=getSupportFragmentManager();
+                    FragmentTransaction transaction=fm.beginTransaction();
+                    transaction.commit();
+                    TextView t1=(TextView)findViewById(R.id.textView);
+                    TextView t2=(TextView)findViewById(R.id.textView2);
+                    FrameLayout f=(FrameLayout)findViewById(R.id.container);
+                    t1.setAlpha(1.0f);
+                    t2.setAlpha(1.0f);
+                    f.setAlpha(0.0f);
+                    t1.setEnabled(true);
+                    t2.setEnabled(true);
+                    f.setEnabled(false);
+                    findViewById(R.id.settlementNameEdit).setEnabled(false);
+                    findViewById(R.id.alignSpinner).setEnabled(false);
+                    findViewById(R.id.govSpinner).setEnabled(false);
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace();
+                }
+                return true;
+            }
+            default:
+            {
+                return super.onOptionsItemSelected(item);
+            }
+        }
     }
 
     @Override
