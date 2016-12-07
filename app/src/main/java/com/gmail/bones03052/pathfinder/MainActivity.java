@@ -32,10 +32,33 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 
+/*
+    isometric building art.
+
+    http://opengameart.org/content/coastal-tent-buildings-and-animated-signal-fire-unknown-horizons-3d
+    http://opengameart.org/content/medieval-building-03-bleeds-game-art
+    http://opengameart.org/content/medieval-building-02-bleeds-game-art
+    http://opengameart.org/content/medieval-building-01-bleeds-game-art-0
+    http://opengameart.org/content/medieval-building-06
+    http://opengameart.org/content/medieval-stable-isometric-25d
+    http://opengameart.org/content/6-isometric-buildings
+    http://opengameart.org/content/watermill-bleeds-game-art
+    http://opengameart.org/content/western-european-medieval-houses-isometric-25d
+    http://opengameart.org/content/medieval-wooden-guard-tower-isometric-25d
+    http://opengameart.org/content/medieval-stone-guard-tower-isometric-25d
+    http://opengameart.org/content/medieval-archery-range-isometric-25d
+    http://opengameart.org/content/hut-bleeds-game-art
+    http://opengameart.org/content/tents-hunter-lumberjack-pavilion-storage-unknown-horizons-2d
+    http://opengameart.org/content/hreikins-modular-medieval-buildings
+    http://opengameart.org/content/quarters-bleeds-game-art
+    http://opengameart.org/content/grassland-tileset
+    http://opengameart.org/content/cave-tileset
+    https://remusprites.carbonmade.com/projects/4970388
+ */
+
 /**
  * Created by Dennis Champagne on 9/2/16.
  */
-
 public class MainActivity extends AppCompatActivity
 {
 
@@ -55,14 +78,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         database=new DBHandler(this,DBHandler.DATABASE_NAME,null,DBHandler.DATABASE_VERSION);
         load();
-        //TODO: spawn a new fragment that displays the settlements
-        /*
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction transaction = fm.beginTransaction();
-        Fragment fragment1 = new SettlementFragment();
-        transaction.replace(R.id.container, fragment1);
-        transaction.commit();
-        */
     }
 
     @Override
