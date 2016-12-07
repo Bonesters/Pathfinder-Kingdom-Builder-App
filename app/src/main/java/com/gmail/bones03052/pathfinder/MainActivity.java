@@ -1,6 +1,7 @@
 package com.gmail.bones03052.pathfinder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -88,6 +89,16 @@ public class MainActivity extends AppCompatActivity implements SettlementFragmen
     @Override
     public void onListFragmentInteraction(SettlementItem item){
         //What happens when a user selects a settlement from the list
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        Fragment fragment = new SettlementViewer();
+        Intent intent = new Intent();
+        intent.setClass(MainActivity.this, SettlementViewer.class);
+        Bundle bundle = new Bundle();
+        bundle.putInt("Id", item.id);
+        intent.putExtras(bundle);
+        transaction.replace(R.id.container, fragment);
+        transaction.commit();
 
     }
 

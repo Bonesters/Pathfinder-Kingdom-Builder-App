@@ -47,4 +47,18 @@
         <item>Utopian Experiment</item>
     </string-array>
 
+    <string name="defaultNumSettlementViewText">0</string>
+    <string name="productivitySettlementViewText">Productivity: </string>
+    <string name="societySettlementViewText">Society: </string>
+    <string name="corruptionSettlementViewText">Corruption: </string>
+    <string name="lawSettlementViewText">Law: </string>
+    <string name="loreSettlementViewText">Lore: </string>
+    <string name="crimeSettlementViewText">Crime: </string>
+    <string name="spellSettlementViewText">Spell Modifier: </string>
+    <string name="baseSettlementViewText">Base Value Multiplier: </string>
+    <string name="purchaseSettlementViewText">Purchase Multiplier: </string>
+    <string name="dangerSettlementViewText">Danger Modifier: </string>
+    <string name="specialSettlementViewText">Special: </string>
+    <string name="specialTextSettlementViewText">Special Text: </string>
+
 </resources>
