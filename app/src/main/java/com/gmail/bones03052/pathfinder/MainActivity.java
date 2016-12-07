@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.gmail.bones03052.pathfinder.gui.SettlementFragment;
+import com.gmail.bones03052.pathfinder.gui.SettlementList;
+import com.gmail.bones03052.pathfinder.gui.SettlementList.SettlementItem;
+import com.gmail.bones03052.pathfinder.gui.SettlementViewer;
 import com.gmail.bones03052.pathfinder.settlement.BuildStat;
 import com.gmail.bones03052.pathfinder.settlement.Building;
 import com.gmail.bones03052.pathfinder.settlement.District;
@@ -59,7 +62,8 @@ import android.view.MenuItem;
 /**
  * Created by Dennis Champagne on 9/2/16.
  */
-public class MainActivity extends AppCompatActivity
+
+public class MainActivity extends AppCompatActivity implements SettlementFragment.OnListFragmentInteractionListener
 {
 
     public static final String SETLEMENTS="settlements";
@@ -78,6 +82,13 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         database=new DBHandler(this,DBHandler.DATABASE_NAME,null,DBHandler.DATABASE_VERSION);
         load();
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(SettlementItem item){
+        //What happens when a user selects a settlement from the list
+
     }
 
     @Override
@@ -97,6 +108,12 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.action_add_new) {
             //TODO: spawn a new settlement fragment and add it to the list
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction transaction = fm.beginTransaction();
+            Fragment fragment = new SettlementViewer();
+            transaction.replace(R.id.container, fragment);
+            transaction.commit();
+
             return true;
         }
 
@@ -106,31 +123,9 @@ public class MainActivity extends AppCompatActivity
             FragmentManager fm = getSupportFragmentManager();
             FragmentTransaction transaction = fm.beginTransaction();
             Fragment fragment1 = new SettlementFragment();
-            //transaction.replace(R.id.container, fragment1);
+            transaction.replace(R.id.container, fragment1);
             transaction.commit();
 
-            /*
-
-            //Within the fragment do this:
-                // Inflate the layout for this fragment
-                View rootView = inflater.inflate(R.layout.fragment1_main, container, false);
-
-                Button myBtn = (Button) rootView.findViewById(R.id.myBtn1);
-                myBtn.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        FragmentManager fm = getActivity().getSupportFragmentManager();
-                        FragmentTransaction transaction = fm.beginTransaction();
-                        Fragment fragment2 = new MyFragment2();
-                        transaction.replace(R.id.container, fragment2);
-                        transaction.commit();
-                    }
-                } );
-
-                return rootView;
-
-            */
             return true;
         }
 

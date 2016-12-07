@@ -14,6 +14,37 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="welcomeText">Welcome to the Pathfinder Kingdom Manager App!</string>
     <string name="welcomeBeginText">To begin, select \'Add New Settlement\' from the dropdown menu, otherwise, select \'View Settlement List\'!</string>
-    <string name="welcomeSettlementNumText">Active Settlements:</string>
-    <string name="welcomeDistrictNumText">Total Active Districts:</string>
+    <string name="welcomeSettlementNumText">Active Settlements: </string>
+    <string name="welcomeDistrictNumText">Total Active Districts: </string>
+
+    <string name="nameSettlementViewText">Name: </string>
+    <string name="alignSettlementViewText">Alignment: </string>
+    <string name="govSettlementViewText">Government: </string>
+
+    <string-array name="alignmentTypes">
+        <item>Lawful Good</item>
+        <item>Neutral Good</item>
+        <item>Chaotic Good</item>
+        <item>Lawful Neutral</item>
+        <item>True Neutral</item>
+        <item>Chaotic Neutral</item>
+        <item>Lawful Evil</item>
+        <item>Neutral Evil</item>
+        <item>Chaotic Evil</item>
+    </string-array>
+
+    <string-array name="governmentTypes">
+        <item>Autocracy</item>
+        <item>Colonial</item>
+        <item>Council</item>
+        <item>Dynasty</item>
+        <item>Magical</item>
+        <item>Military</item>
+        <item>Overlord</item>
+        <item>Plutocracy</item>
+        <item>Secret Syndicate</item>
+        <item>Theocracy</item>
+        <item>Utopian Experiment</item>
+    </string-array>
+
 </resources>

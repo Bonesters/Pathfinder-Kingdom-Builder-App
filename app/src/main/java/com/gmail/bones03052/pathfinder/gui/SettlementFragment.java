@@ -2,7 +2,6 @@ package com.gmail.bones03052.pathfinder.gui;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -64,11 +63,16 @@ public class SettlementFragment extends ListFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        try {
+            mListener = (OnListFragmentInteractionListener) getActivity();
+        } catch (ClassCastException e) {
+            throw new ClassCastException(getActivity().toString()
+                    + " must implement OnFragmentInteractionListener");
         }
     }
 
@@ -86,6 +90,6 @@ public class SettlementFragment extends ListFragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(SettlementItem item);
+        public void onListFragmentInteraction(SettlementItem item);
     }
 }

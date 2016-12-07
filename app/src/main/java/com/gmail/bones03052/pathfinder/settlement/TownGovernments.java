@@ -15,7 +15,7 @@ public enum TownGovernments
     SECRET_SYNDICATE(2,2,0,-6,0,2,false,""),
     THEOCRACY(0,0,0,0,0,0,true,"Double the modifiers for the settlement's alignment. The settlement gains any one of the following qualities as a ‘bonus' quality: desecrate/hallow, Holy Site, Pious, Racial Enclave, Racially Intolerant, Unholy Site."),
     PLUTOCRACY(2,3,-2,0,0,2,false,""),
-    UPOTIAN_EXPERIMENT(-2,0,2,0,1,-1,false,"");
+    UTOPIAN_EXPERIMENT(-2,0,2,0,1,-1,false,"");
 
     public final int CORRUPTION;
     public final int PRODUCTIVITY;
