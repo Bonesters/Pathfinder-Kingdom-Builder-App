@@ -35,6 +35,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 /*
     isometric building art.
@@ -70,8 +71,8 @@ public class MainActivity extends AppCompatActivity implements SettlementFragmen
     public static final String SETLEMENTS="settlements";
     public static final String SAVE_DATA_FILENAME="saveData.json";
 
-    private DBHandler database;
-    private LinkedList<Settlement> settlements=new LinkedList<>();
+    public static DBHandler database;
+    public static LinkedList<Settlement> settlements=new LinkedList<>();
 
     //TODO: 1) Finish tab for district fragment connectivity in settlement viewer
     //TODO: 2) Connect the intent and bundle in onListFragmentInteraction with the settlement viewer
@@ -87,56 +88,78 @@ public class MainActivity extends AppCompatActivity implements SettlementFragmen
     }
 
     @Override
-    public void onListFragmentInteraction(SettlementItem item){
+    public void onListFragmentInteraction(SettlementItem item)
+    {
         //What happens when a user selects a settlement from the list
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction transaction = fm.beginTransaction();
-        Fragment fragment = new SettlementViewer();
-        Intent intent = new Intent();
-        intent.setClass(MainActivity.this, SettlementViewer.class);
-        Bundle bundle = new Bundle();
-        bundle.putInt("Id", item.id);
+        FragmentManager fm=getSupportFragmentManager();
+        FragmentTransaction transaction=fm.beginTransaction();
+        Fragment fragment=new SettlementViewer();
+        Intent intent=new Intent();
+        intent.setClass(MainActivity.this,SettlementViewer.class);
+        Bundle bundle=new Bundle();
+        bundle.putInt("Id",item.id);
         intent.putExtras(bundle);
-        transaction.replace(R.id.container, fragment);
+        transaction.replace(R.id.container,fragment);
         transaction.commit();
 
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_main,menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        int id=item.getItemId();
 
-        if (id == R.id.action_settings) {
+        if(id==R.id.action_settings)
+        {
             return true;
         }
 
-        if (id == R.id.action_add_new) {
+        if(id==R.id.action_add_new)
+        {
             //TODO: spawn a new settlement fragment and add it to the list
-            FragmentManager fm = getSupportFragmentManager();
-            FragmentTransaction transaction = fm.beginTransaction();
-            Fragment fragment = new SettlementViewer();
-            transaction.replace(R.id.container, fragment);
+            FragmentManager fm=getSupportFragmentManager();
+            FragmentTransaction transaction=fm.beginTransaction();
+            Fragment fragment=new SettlementViewer();
+            TextView t1=(TextView)findViewById(R.id.textView);
+            TextView t2=(TextView)findViewById(R.id.textView2);
+            t1.setAlpha(0.0f);
+            t2.setAlpha(0.0f);
+            t1.setEnabled(false);
+            t2.setEnabled(false);
+            transaction.replace(R.id.container,fragment);
             transaction.commit();
 
             return true;
         }
 
-        if (id == R.id.action_view_current) {
+        if(id==R.id.action_view_current)
+        {
             //TODO: spawn a new fragment that displays the settlements
+            try
+            {
 
-            FragmentManager fm = getSupportFragmentManager();
-            FragmentTransaction transaction = fm.beginTransaction();
-            Fragment fragment1 = new SettlementFragment();
-            transaction.replace(R.id.container, fragment1);
-            transaction.commit();
-
+                FragmentManager fm=getSupportFragmentManager();
+                FragmentTransaction transaction=fm.beginTransaction();
+                Fragment fragment1=new SettlementFragment();
+                TextView t1=(TextView)findViewById(R.id.textView);
+                TextView t2=(TextView)findViewById(R.id.textView2);
+                t1.setEnabled(false);
+                t2.setEnabled(false);
+                transaction.replace(R.id.container,fragment1);
+                transaction.commit();
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
             return true;
         }
 
@@ -168,7 +191,7 @@ public class MainActivity extends AppCompatActivity implements SettlementFragmen
             settlements=loadSettlements(json);
             Log.v("Pathfinder-settlement:","successfully loaded saved data (hopefully).");
         }
-        catch (Exception e)
+        catch(Exception e)
         {
             e.printStackTrace();
             settlements=new LinkedList<>();
@@ -183,7 +206,7 @@ public class MainActivity extends AppCompatActivity implements SettlementFragmen
             out.write(toJSON().toString().getBytes());
             out.close();
         }
-        catch (Exception e)
+        catch(Exception e)
         {
             e.printStackTrace();
         }
@@ -197,7 +220,7 @@ public class MainActivity extends AppCompatActivity implements SettlementFragmen
 
 
         JSONArray sett=new JSONArray();
-        for(Settlement s:settlements)
+        for(Settlement s : settlements)
         {
             sett.put(s.toJSONObject());
         }
@@ -213,11 +236,11 @@ public class MainActivity extends AppCompatActivity implements SettlementFragmen
         LinkedList<TownGovernment> newGovs=new LinkedList<>();
         LinkedList<Integer> newGovIds=new LinkedList<>();
         LinkedList<Integer> govIds=new LinkedList<>();
-        for(TownGovernments g:TownGovernments.values())
+        for(TownGovernments g : TownGovernments.values())
         {
             govIds.add(g.ordinal());
         }
-        for(Settlement s:settlements)
+        for(Settlement s : settlements)
         {
             TownGovernment g=s.getGovernment();
             if(!govIds.contains(g.getId())&&!newGovIds.contains(g.getId()))
@@ -229,7 +252,7 @@ public class MainActivity extends AppCompatActivity implements SettlementFragmen
                 }
             }
         }
-        for(TownGovernment g:newGovs)
+        for(TownGovernment g : newGovs)
         {
             database.addTownGovernment(g);
         }
@@ -241,13 +264,13 @@ public class MainActivity extends AppCompatActivity implements SettlementFragmen
         LinkedList<Quality> newQualities=new LinkedList<>();
         LinkedList<Integer> newQualIds=new LinkedList<>();
         LinkedList<Integer> qualIds=new LinkedList<>();
-        for(Qualities q:Qualities.values())
+        for(Qualities q : Qualities.values())
         {
             qualIds.add(q.ordinal());
         }
-        for(Settlement s:settlements)
+        for(Settlement s : settlements)
         {
-            for(Quality q:s.getQual())
+            for(Quality q : s.getQual())
             {
                 if(!qualIds.contains(q.getId())&&!newQualities.contains(q.getId()))
                 {
@@ -259,7 +282,7 @@ public class MainActivity extends AppCompatActivity implements SettlementFragmen
                 }
             }
         }
-        for(Quality q:newQualities)
+        for(Quality q : newQualities)
         {
             database.addQuality(q);
         }
@@ -271,15 +294,15 @@ public class MainActivity extends AppCompatActivity implements SettlementFragmen
         LinkedList<Building> newBuildings=new LinkedList<>();
         LinkedList<Integer> newBuildIds=new LinkedList<>();
         LinkedList<Integer> buildIds=new LinkedList<>();
-        for(BuildStat b:BuildStat.values())
+        for(BuildStat b : BuildStat.values())
         {
             buildIds.add(b.ordinal());
         }
-        for(Settlement s:settlements)
+        for(Settlement s : settlements)
         {
-            for(District d:s.getDistricts())
+            for(District d : s.getDistricts())
             {
-                for(Building b:d.getBuildings())
+                for(Building b : d.getBuildings())
                 {
                     if(!buildIds.contains(b.getId())&&!newBuildIds.contains(b.getId()))
                     {
@@ -292,7 +315,7 @@ public class MainActivity extends AppCompatActivity implements SettlementFragmen
                 }
             }
         }
-        for(Building b:newBuildings)
+        for(Building b : newBuildings)
         {
             database.addBuilding(b);
         }

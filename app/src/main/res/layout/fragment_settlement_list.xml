@@ -10,4 +10,6 @@
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context="com.gmail.bones03052.pathfinder.gui.SettlementFragment"
-    tools:listitem="@layout/fragment_settlement" />
+    tools:listitem="@layout/fragment_settlement" >
+
+</android.support.v7.widget.RecyclerView>

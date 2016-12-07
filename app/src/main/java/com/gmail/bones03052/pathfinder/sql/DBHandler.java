@@ -22,39 +22,39 @@ public class DBHandler extends SQLiteOpenHelper
 {
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "settlements.db";
-    public static final String TABLE_BUILDINGS = "buildings";
-    public static final String TABLE_TOWN_GOVERNMENTS="town governments";
-    public static final String TABLE_QUALITIES="qualities";
-    public static final String COL_ID="id";
-    public static final String COL_NAME="name";
-    public static final String COL_ECO="economy";
-    public static final String COL_LOYALTY="loyalty";
-    public static final String COL_STABILITY="stability";
-    public static final String COL_UNREST="unrest";
-    public static final String COL_CORRUPTION="corruption";
-    public static final String COL_CRIME="crime";
-    public static final String COL_LAW="law";
-    public static final String COL_LORE="lore";
-    public static final String COL_SOCIETY="society";
-    public static final String COL_POP="population";
-    public static final String COL_FAME="fame";
-    public static final String COL_INFAMY="infamy";
-    public static final String COL_BVAL="base value";
-    public static final String COL_LVL="level";
-    public static final String COL_PROD="productivity";
-    public static final String COL_LOTS="lots";
-    public static final String COL_COST="cost (BP)";
-    public static final String COL_BUILD_TIME="build time (months)";
-    public static final String COL_HOUSES_REQUIRED="houses required";
-    public static final String COL_WATER_REQUIRED="water required";
-    public static final String COL_UPGRADE_TO="upgrades to";
-    public static final String COL_DISCOUNTS="discounts";
-    public static final String COL_SPELL_MOD="spell level modifier";
-    public static final String COL_BASE_MUL="base value multiplier";
-    public static final String COL_PUR_MUL="purchase value multiplier";
-    public static final String COL_DANGER="danger";
-    public static final String COL_SPECIAL="special";
-    public static final String COL_SPECIAL_TEXT="special text";
+    public static final String TABLE_BUILDINGS = "\"buildings\"";
+    public static final String TABLE_TOWN_GOVERNMENTS="\"town governments\"";
+    public static final String TABLE_QUALITIES="\"qualities\"";
+    public static final String COL_ID="\"id\"";
+    public static final String COL_NAME="\"name\"";
+    public static final String COL_ECO="\"economy\"";
+    public static final String COL_LOYALTY="\"loyalty\"";
+    public static final String COL_STABILITY="\"stability\"";
+    public static final String COL_UNREST="\"unrest\"";
+    public static final String COL_CORRUPTION="\"corruption\"";
+    public static final String COL_CRIME="\"crime\"";
+    public static final String COL_LAW="\"law\"";
+    public static final String COL_LORE="\"lore\"";
+    public static final String COL_SOCIETY="\"society\"";
+    public static final String COL_POP="\"population\"";
+    public static final String COL_FAME="\"fame\"";
+    public static final String COL_INFAMY="\"infamy\"";
+    public static final String COL_BVAL="\"base value\"";
+    public static final String COL_LVL="\"level\"";
+    public static final String COL_PROD="\"productivity\"";
+    public static final String COL_LOTS="\"lots\"";
+    public static final String COL_COST="\"cost \\(BP\\)\"";
+    public static final String COL_BUILD_TIME="\"build time \\(months\\)\"";
+    public static final String COL_HOUSES_REQUIRED="\"houses required\"";
+    public static final String COL_WATER_REQUIRED="\"water required\"";
+    public static final String COL_UPGRADE_TO="\"upgrades to\"";
+    public static final String COL_DISCOUNTS="\"discounts\"";
+    public static final String COL_SPELL_MOD="\"spell level modifier\"";
+    public static final String COL_BASE_MUL="\"base value multiplier\"";
+    public static final String COL_PUR_MUL="\"purchase value multiplier\"";
+    public static final String COL_DANGER="\"danger\"";
+    public static final String COL_SPECIAL="\"special\"";
+    public static final String COL_SPECIAL_TEXT="\"special text\"";
 
 
 
@@ -94,7 +94,8 @@ public class DBHandler extends SQLiteOpenHelper
         //TODO: add version change handler.
     }
 
-    public int addBuilding(Building b)
+    //public int addBuilding(Building b)
+    public void addBuilding(Building b)
     {
         ContentValues values = new ContentValues();
         if(b.getId()>=0)
@@ -127,14 +128,17 @@ public class DBHandler extends SQLiteOpenHelper
         values.put(COL_SPECIAL,b.isSpecial());
         values.put(COL_SPECIAL_TEXT,b.getSpecial());
 
+        /*
         SQLiteDatabase db = this.getWritableDatabase();
 
         int i=(int)db.insert(TABLE_BUILDINGS, null, values);
         db.close();
         return i;
+        */
     }
 
-    public int addQuality(Quality q)
+    //public int addQuality(Quality q)
+    public void addQuality(Quality q)
     {
         ContentValues values = new ContentValues();
         if(q.getId()>=0)
@@ -155,14 +159,17 @@ public class DBHandler extends SQLiteOpenHelper
         values.put(COL_SPECIAL,q.isSpecial());
         values.put(COL_SPECIAL_TEXT,q.getSpecial());
 
+        /*
         SQLiteDatabase db = this.getWritableDatabase();
 
         int i=(int)db.insert(TABLE_QUALITIES, null, values);
         db.close();
         return i;
+        */
     }
 
-    public int addTownGovernment(TownGovernment g)
+    //public int addTownGovernment(TownGovernment g)
+    public void addTownGovernment(TownGovernment g)
     {
         ContentValues values = new ContentValues();
         if(g.getId()>=0)
@@ -179,11 +186,13 @@ public class DBHandler extends SQLiteOpenHelper
         values.put(COL_SPECIAL,g.isSpecial());
         values.put(COL_SPECIAL_TEXT,g.getSpecial());
 
+        /*
         SQLiteDatabase db = this.getWritableDatabase();
 
         int i=(int)db.insert(TABLE_TOWN_GOVERNMENTS, null, values);
         db.close();
         return i;
+        */
     }
 
 
@@ -375,5 +384,15 @@ public class DBHandler extends SQLiteOpenHelper
             result=(i!=0);
         }
         return result;
+    }
+
+    private String escape(String s)
+    {
+        String out="";
+        for(char c:s.toCharArray())
+        {
+            out+="\\"+c;
+        }
+        return out;
     }
 }

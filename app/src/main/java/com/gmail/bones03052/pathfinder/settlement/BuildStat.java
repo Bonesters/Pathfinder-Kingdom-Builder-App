@@ -195,7 +195,7 @@ public enum BuildStat
         return (new Building(this)).toString();
     }
 
-    public LinkedList<Building> getUpgrades()
+    public LinkedList<BuildStat> getUpgrades()
     {
         BuildStat[] upgrade;
         switch(this)
@@ -213,27 +213,30 @@ public enum BuildStat
             case TRADE_SHOP:    {upgrade=new BuildStat[]{TOWN_HALL};            break;}
             default:            {upgrade=null;                                  break;}
         }
-        LinkedList<Building> up=new LinkedList<>();
-        for(BuildStat b:upgrade)
+        LinkedList<BuildStat> up=new LinkedList<>();
+        if(upgrade!=null)
         {
-            up.add(new Building(b));
+            for(BuildStat b : upgrade)
+            {
+                up.add(b);
+            }
         }
         return up;
     }
 
     public String getStringUpgrades()
     {
-        LinkedList<Building> upgrade=getUpgrades();
+        LinkedList<BuildStat> upgrade=getUpgrades();
         String s="{";
-        for(Building b:upgrade)
+        for(BuildStat b:upgrade)
         {
-            s+=b.getName().toLowerCase().replace("_"," ")+",";
+            s+=b.name().toLowerCase().replace("_"," ")+",";
         }
         s=s.substring(0,s.length()-1)+"}";
         return s;
     }
 
-    public LinkedList<Building> getDiscounts()
+    public LinkedList<BuildStat> getDiscounts()
     {
         BuildStat[] discount;
         switch(this)
@@ -265,23 +268,26 @@ public enum BuildStat
             case WATERFRONT:        {discount=new BuildStat[]{BLACK_MARKET,GUILDHALL,PIER};                                             break;}
             default:                {discount=null;                                                                                     break;}
         }
-        LinkedList<Building> dis=new LinkedList<>();
-        for(BuildStat b:discount)
+        LinkedList<BuildStat> dis=new LinkedList<>();
+        if(discount!=null)
         {
-            dis.add(new Building(b));
+            for(BuildStat b : discount)
+            {
+                dis.add(b);
+            }
         }
         return dis;
     }
 
     public String getStringDiscounts()
     {
-        LinkedList<Building> discount=getDiscounts();
-        String s="";
-        for(Building b:discount)
+        LinkedList<BuildStat> discount=getDiscounts();
+        String s="{";
+        for(BuildStat b:discount)
         {
-            s+=b.getName().toLowerCase().replace("_"," ")+",";
+            s+=b.name().toLowerCase().replace("_"," ")+",";
         }
-        s="{"+s.substring(0,s.length()-1)+"}";
+        s=s.substring(0,s.length()-1)+"}";
         return s;
     }
 

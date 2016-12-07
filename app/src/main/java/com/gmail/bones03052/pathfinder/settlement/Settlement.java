@@ -120,7 +120,16 @@ public class Settlement
         JSONObject object=new JSONObject();
         object.put(NAME,name);
         object.put(ALIGN,alignment);
-        object.put(GOVERNMENT,gov.getId());
+        try
+        {
+            object.put(GOVERNMENT,gov.getId());
+        }
+        catch(NullPointerException e)
+        {
+            gov=new TownGovernment(TownGovernments.AUTOCRACY);
+            object.put(GOVERNMENT,gov.getId());
+            //couldn't get the government, so using default government instead.
+        }
         JSONArray quals=new JSONArray();
         for(Quality q:qual)
         {
@@ -144,11 +153,6 @@ public class Settlement
     public void setTownGovernment(TownGovernment g)
     {
         this.gov=g;
-    }
-
-    public TownGovernment setTownGovernment()
-    {
-        return gov;
     }
 
     public int getAlignment()

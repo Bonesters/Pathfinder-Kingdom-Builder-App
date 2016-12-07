@@ -8,7 +8,9 @@ import android.widget.TextView;
 
 import com.gmail.bones03052.pathfinder.gui.SettlementFragment.OnListFragmentInteractionListener;
 import com.gmail.bones03052.pathfinder.gui.SettlementList.SettlementItem;
+
 import java.util.List;
+
 import com.gmail.bones03052.pathfinder.R;
 
 /**
@@ -16,33 +18,40 @@ import com.gmail.bones03052.pathfinder.R;
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class SettlementViewAdapter extends RecyclerView.Adapter<SettlementViewAdapter.ViewHolder> {
+public class SettlementViewAdapter extends RecyclerView.Adapter<SettlementViewAdapter.ViewHolder>
+{
 
     private final List<SettlementItem> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public SettlementViewAdapter(List<SettlementItem> items, OnListFragmentInteractionListener listener) {
-        mValues = items;
-        mListener = listener;
+    public SettlementViewAdapter(List<SettlementItem> items,OnListFragmentInteractionListener listener)
+    {
+        mValues=items;
+        mListener=listener;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_settlement, parent, false);
+    public ViewHolder onCreateViewHolder(ViewGroup parent,int viewType)
+    {
+        View view=LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.fragment_settlement,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
+    public void onBindViewHolder(final ViewHolder holder,int position)
+    {
+        holder.mItem=mValues.get(position);
+        holder.mIdView.setText(String.valueOf(mValues.get(position).id));
         holder.mContentView.setText(mValues.get(position).content);
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
+        holder.mView.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
-                if (null != mListener) {
+            public void onClick(View v)
+            {
+                if(null!=mListener)
+                {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
                     mListener.onListFragmentInteraction(holder.mItem);
@@ -52,26 +61,30 @@ public class SettlementViewAdapter extends RecyclerView.Adapter<SettlementViewAd
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount()
+    {
         return mValues.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder
+    {
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
         public SettlementItem mItem;
 
-        public ViewHolder(View view) {
+        public ViewHolder(View view)
+        {
             super(view);
-            mView = view;
-            mIdView = (TextView) view.findViewById(R.id.id);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            mView=view;
+            mIdView=(TextView)view.findViewById(R.id.id);
+            mContentView=(TextView)view.findViewById(R.id.content);
         }
 
         @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+        public String toString()
+        {
+            return super.toString()+" '"+mContentView.getText()+"'";
         }
     }
 }

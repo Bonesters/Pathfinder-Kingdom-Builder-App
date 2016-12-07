@@ -23,13 +23,13 @@
 
     <string-array name="alignmentTypes">
         <item>Lawful Good</item>
-        <item>Neutral Good</item>
-        <item>Chaotic Good</item>
         <item>Lawful Neutral</item>
-        <item>True Neutral</item>
-        <item>Chaotic Neutral</item>
         <item>Lawful Evil</item>
+        <item>Neutral Good</item>
+        <item>True Neutral</item>
         <item>Neutral Evil</item>
+        <item>Chaotic Good</item>
+        <item>Chaotic Neutral</item>
         <item>Chaotic Evil</item>
     </string-array>
 
@@ -41,9 +41,9 @@
         <item>Magical</item>
         <item>Military</item>
         <item>Overlord</item>
-        <item>Plutocracy</item>
         <item>Secret Syndicate</item>
         <item>Theocracy</item>
+        <item>Plutocracy</item>
         <item>Utopian Experiment</item>
     </string-array>
 
