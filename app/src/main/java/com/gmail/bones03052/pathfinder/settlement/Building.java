@@ -73,7 +73,7 @@ public class Building
 
     public Building(BuildStat b)
     {
-        this(b.ordinal(),b.name().toLowerCase(),b.economy,b.loyalty,b.stability,b.unrest,b.corruption,b.crime,b.law,b.lore,b.society,b.population,b.fame,b.infamy,b.baseValue,b.level,b.productivity,b.lots,b.cost,b.buildTime,b.getHousesRequired(),b.requiresWater(),b.getUpgrades(),b.getDiscounts(),b.special,b.specialText);
+        this(b.ordinal(),b.name().toLowerCase(),b.economy,b.loyalty,b.stability,b.unrest,b.corruption,b.crime,b.law,b.lore,b.society,b.population,b.fame,b.infamy,b.baseValue,b.level,b.productivity,b.lots,b.cost,b.buildTime,b.getHousesRequired(),b.requiresWater(),b.getStringUpgrades(),b.getStringDiscounts(),b.special,b.specialText);
     }
 
     public int getId()

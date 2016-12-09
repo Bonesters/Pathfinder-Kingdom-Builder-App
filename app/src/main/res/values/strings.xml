@@ -3,4 +3,62 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_settlement_overview_tabbed">SettlementOverviewTabbedActivity
+    </string>
+
+    <string name="action_settings">Settings</string>
+    <string name="action_new_settlement">Add New Settlement</string>
+    <string name="action_settlement0">Settlement 0</string>
+    <string name="action_view_current">View Settlement List</string>
+
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="welcomeText">Welcome to the Pathfinder Kingdom Manager App!</string>
+    <string name="welcomeBeginText">To begin, select \'Add New Settlement\' from the dropdown menu, otherwise, select \'View Settlement List\'!</string>
+    <string name="welcomeSettlementNumText">Active Settlements: </string>
+    <string name="welcomeDistrictNumText">Total Active Districts: </string>
+
+    <string name="nameSettlementViewText">Name: </string>
+    <string name="alignSettlementViewText">Alignment: </string>
+    <string name="govSettlementViewText">Government: </string>
+
+    <string-array name="alignmentTypes">
+        <item>Lawful Good</item>
+        <item>Lawful Neutral</item>
+        <item>Lawful Evil</item>
+        <item>Neutral Good</item>
+        <item>True Neutral</item>
+        <item>Neutral Evil</item>
+        <item>Chaotic Good</item>
+        <item>Chaotic Neutral</item>
+        <item>Chaotic Evil</item>
+    </string-array>
+
+    <string-array name="governmentTypes">
+        <item>Autocracy</item>
+        <item>Colonial</item>
+        <item>Council</item>
+        <item>Dynasty</item>
+        <item>Magical</item>
+        <item>Military</item>
+        <item>Overlord</item>
+        <item>Secret Syndicate</item>
+        <item>Theocracy</item>
+        <item>Plutocracy</item>
+        <item>Utopian Experiment</item>
+    </string-array>
+
+    <string name="defaultNumSettlementViewText">0</string>
+    <string name="productivitySettlementViewText">Productivity: </string>
+    <string name="societySettlementViewText">Society: </string>
+    <string name="corruptionSettlementViewText">Corruption: </string>
+    <string name="lawSettlementViewText">Law: </string>
+    <string name="loreSettlementViewText">Lore: </string>
+    <string name="crimeSettlementViewText">Crime: </string>
+    <string name="spellSettlementViewText">Spell Modifier: </string>
+    <string name="baseSettlementViewText">Base Value Multiplier: </string>
+    <string name="purchaseSettlementViewText">Purchase Multiplier: </string>
+    <string name="dangerSettlementViewText">Danger Modifier: </string>
+    <string name="specialSettlementViewText">Special: </string>
+    <string name="specialTextSettlementViewText">Special Text: </string>
+
 </resources>
